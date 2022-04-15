@@ -1,0 +1,9 @@
+[submodule "term/.tmux/plugins/tmux-open"]
+	path = term/.tmux/plugins/tmux-open
+	url = https://github.com/tmux-plugins/tmux-open.git
+[submodule "term/.tmux/plugins/tmux-yank"]
+	path = term/.tmux/plugins/tmux-yank
+	url = https://github.com/tmux-plugins/tmux-yank.git
+[submodule "term/.tmux/plugins/tpm"]
+	path = term/.tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm.git

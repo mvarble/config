@@ -1,0 +1,4 @@
+amsmath.vim: call delete('/home/mvarble/.vim/after/syntax/tex/amsmath.vim')
+amsmath.vim: call delete('/home/mvarble/.vim/after/syntax/tex/amsmath.vim')
+amsmath.vba: call delete('/home/mvarble/.vim/after/syntax/tex/amsmath.vim')
+localvimrc.vmb: call delete('/home/mvarble/.vim/doc/localvimrc.txt')|call delete('/home/mvarble/.vim/plugin/localvimrc.vim')
