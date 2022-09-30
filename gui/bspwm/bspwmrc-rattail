@@ -1,9 +1,15 @@
 #!/bin/sh
 
 #
+# set environment variables
+#
+MONITOR_MAIN="eDP-1"
+export MONITOR_MAIN
+
+#
 # set display
 #
-xrandr --output eDP1 --primary
+xrandr --output $MONITOR_MAIN
 
 #
 # set keyboard options
@@ -12,15 +18,9 @@ xset r rate 250 100
 setxkbmap -option caps:super
 
 #
-# set environment variables
-#
-MONITOR_MAIN="eDP1"
-export MONITOR_MAIN
-
-#
 # TODO: configure workspaces depending on monitors
 #
-bspc monitor eDP1 -d    etc.
+bspc monitor $MONITOR_MAIN -d    etc.
 
 #
 # configure window geometry
@@ -39,13 +39,16 @@ bspc rule -a polybar border=off manage=off
 bspc rule -a Alacritty desktop='^1'
 bspc rule -a firefox desktop='^2'
 bspc rule -a Zathura state='tiled' desktop='^3'
+bspc rule -a Evince state='tiled' desktop='^3'
+bspc rule -a okular state='tiled' desktop='^3'
 
 #
 # launch all the goodies
 #
 sxhkd &
+picom &
 ulauncher --hide-window --no-window-shadow &
 nitrogen --restore &
 polybar-msg cmd quit &
-polybar --reload rattail 2>&1 | tee -a /tmp/polybar.log & disown
+polybar --config=~/.config/polybar/config.ini --reload rattail 2>&1 | tee -a /tmp/polybar.log & disown
 dropbox start &

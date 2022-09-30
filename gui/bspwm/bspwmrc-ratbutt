@@ -3,7 +3,13 @@
 #
 # set display
 #
-xrandr --output eDP-1 --mode 1366x768 --primary --output HDMI-1 --mode 1680x1050 --above eDP-1
+xrandr --output eDP-1 --mode 1366x768 --primary 
+
+#
+# set environment variables
+#
+MONITOR_MAIN="eDP-1"
+export MONITOR_MAIN
 
 #
 # set keyboard options
@@ -12,17 +18,9 @@ xset r rate 250 100
 setxkbmap -option caps:super
 
 #
-# set environment variables
-#
-MONITOR_MAIN="HDMI-1"
-export MONITOR_MAIN
-
-#
 # TODO: configure workspaces depending on monitors
 #
-bspc monitor HDMI-1 -d 2 3 4
-bspc monitor eDP-1 -d 1
-bspc monitor eDP-1 -s HDMI-1
+bspc monitor $MONITOR_MAIN -d    etc.
 
 #
 # configure window geometry
@@ -36,18 +34,20 @@ bspc config gapless_monocle      false
 #
 # configure rules for specific apps
 #
-bspc rule -a ulauncher focus=on
+bspc rule -a albert focus=on border=off
 bspc rule -a polybar border=off manage=off
 bspc rule -a Alacritty desktop='^1'
 bspc rule -a firefox desktop='^2'
 bspc rule -a Zathura state='tiled' desktop='^3'
+bspc rule -a Evince state='tiled' desktop='^3'
+bspc rule -a okular state='tiled' desktop='^3'
 
 #
 # launch all the goodies
 #
 sxhkd &
 picom &
-ulauncher --hide-window --no-window-shadow &
+albert &>/tmp/albert.log & disown
 nitrogen --restore &
 polybar-msg cmd quit &
 polybar --reload ratbutt 2>&1 | tee -a /tmp/polybar.log & disown

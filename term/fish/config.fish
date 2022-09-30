@@ -15,14 +15,7 @@ set PATH ~/.julia-$JULIA_VERSION/bin $PATH
 set PATH ~/.blender-$BLENDER_VERSION $PATH
 set PATH ~/.nvim/bin $PATH
 set PATH ~/.cargo/bin $PATH
-
-if test "$hostname" = "Kaitlynnes-MacBook-Air.local"
-  set PATH /opt/homebrew/bin $PATH
-  set OPEN open
-else
-  set PATH ~/.local/bin $PATH
-  set OPEN xdg-open
-end
+set PATH ~/.npm-global/bin $PATH
 
 # allow node 8GB ram
 set -x NODE_OPTIONS '--max_old_space_size=8192'
