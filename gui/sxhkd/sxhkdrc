@@ -34,7 +34,7 @@ super + w
 
 # file explorer
 super + e
-  thunar
+  nautilus
 
 # make sxhkd reload its configuration files:
 super + Escape

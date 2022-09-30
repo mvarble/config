@@ -15,6 +15,7 @@ setxkbmap -option caps:super
 # set wacom to the appropriate display
 #
 xsetwacom set "22" MapToOutput HEAD-1
+xsetwacom set "25" MapToOutput HEAD-1
 xsetwacom set "18" MapToOutput HEAD-1
 xsetwacom set "17" MapToOutput HEAD-1
 
@@ -49,6 +50,7 @@ bspc rule -a polybar border=off manage=off
 bspc rule -a Alacritty desktop='^1'
 bspc rule -a firefox desktop='^2'
 bspc rule -a Zathura state='tiled' desktop='^3'
+bspc rule -a Evince state='tiled' desktop='^3'
 bspc rule -a okular state='tiled' desktop='^3'
 bspc rule -a Xournalpp state='tiled' desktop='^4'
 
@@ -63,7 +65,8 @@ bspc config remove_disabled_monitors true
 #
 sxhkd &
 picom &
-ulauncher --hide-window --no-window-shadow &
+conky &
+albert &
 nitrogen --restore &
 polybar-msg cmd quit &
 polybar --reload ratcage1 2>&1 | tee -a /tmp/polybar-1.log & disown

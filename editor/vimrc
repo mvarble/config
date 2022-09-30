@@ -1,0 +1,185 @@
+"-------------------------------------------------------------------------------
+" vim-plug Plugins
+"-------------------------------------------------------------------------------
+call plug#begin()
+
+" language support
+Plug 'vim-syntastic/syntastic'
+Plug 'jxnblk/vim-mdx-js'
+Plug 'pangloss/vim-javascript'
+Plug 'MaxMEllon/vim-jsx-pretty'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'cespare/vim-toml'
+Plug 'rust-lang/rust.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
+
+" ui
+Plug 'chriskempson/base16-vim'
+Plug 'JuliaEditorSupport/julia-vim'
+Plug 'preservim/nerdcommenter'
+Plug 'preservim/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'itchyny/lightline.vim'
+
+" ux
+Plug 'joom/latex-unicoder.vim'
+
+call plug#end()
+
+"-------------------------------------------------------------------------------
+" remaining configuration
+"-------------------------------------------------------------------------------
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: There's always complete item selected by default, you may want to enable
+" no select by `"suggest.noselect": true` in your configuration file.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" <TAB> completion of COC suggestions
+
+"function! s:check_back_space() abort
+"  let col = col('.') - 1
+"  return !col || getline('.')[col - 1]  =~ '\s'
+"endfunction
+
+" Insert <tab> when previous text is space, refresh completion if not.
+"inoremap <silent><expr> <TAB>
+"\ coc#pum#visible() ? coc#pum#next(1):
+"\ <SID>check_back_space() ? "\<Tab>" :
+"\ coc#refresh()
+"inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" color COC
+func! s:my_colors_setup() abort
+  highlight CocFloating ctermbg=18
+  highlight CocMenuSel ctermbg=19
+  highlight CocErrorFloat ctermfg=18 ctermfg=5
+  highlight CocInfoFloat ctermfg=18 ctermfg=2
+  highlight CocWarningFloat ctermbg=18 ctermfg=1
+  highlight CocHintFloat ctermfg=18 ctermfg=3
+endfunc
+
+augroup colorscheme_coc_setup | au!
+  au VimEnter * call s:my_colors_setup()
+augroup END
+
+" configure COC to check tex files
+let g:coc_filetype_map = {'tex': 'latex'}
+
+" fenced languages for markdown
+let g:markdown_fenced_languages = ['python', 'julia', 'bash', 'javascript', 'rust', 'typescript', 'typescriptreact']
+
+" fish correction
+set shell=/bin/bash
+
+" pathogen
+execute pathogen#infect()
+
+" syntax enabling
+syntax enable
+filetype plugin indent on
+
+" colorscheme
+set t_Co=256
+let base16colorspace=256 
+colorscheme base16-ashes
+hi Normal ctermbg=NONE guibg=NONE
+
+" mouse scrolling
+set mouse=a
+nmap <LeftMouse> <nop>
+imap <LeftMouse> <nop>
+vmap <LeftMouse> <nop>
+
+" syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_quiet_messages = { "!level": "errors" }
+let g:syntastic_enable_balloons = 1
+let g:syntastic_loc_list_height = 5
+
+" local vimrc
+let g:localvimrc_sandbox=0
+let g:localvimrc_ask=0
+
+" buffer control
+set showcmd
+set timeoutlen=1000
+set ttimeoutlen=100
+set wildmenu
+
+" numbering
+set number relativenumber
+set numberwidth=4
+highlight LineNr ctermfg=gray ctermbg=233
+highlight! link SignColumn LineNr
+
+" nonstandard filetypes
+au BufNewFile,BufRead *.cls set filetype=tex
+au BufNewFile,BufRead *.sty set filetype=tex
+au BufNewFile,BufRead *.tex set filetype=tex
+au BufNewFile,BufRead *.ts set filetype=typescriptreact
+
+" indenting
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+setlocal autoindent
+setlocal cindent
+setlocal smartindent
+set shiftround
+set expandtab
+set smarttab
+
+" line @ 80
+set colorcolumn=101
+highlight ColorColumn ctermbg=233
+
+" no highlight on search
+set nohlsearch
+
+" latex-to-unicode
+let g:unicoder_cancel_normal = 1
+let g:unicoder_cancel_insert = 1
+let g:unicoder_cancel_visual = 1
+nnoremap <C-l> :call unicoder#start(0)<CR>
+inoremap <C-l> <Esc>:call unicoder#start(1)<CR>
+vnoremap <C-l> :<C-u>call unicoder#selection()<CR>
+
+" NERDTree
+nnoremap <C-f> :NERDTreeTabsToggle<CR>
+let NERDTreeMapActivateNode = 'l'
+
+" tabs
+nnoremap <C-d> :q<CR>
+nnoremap <S-N> :tabnew<CR>
+nnoremap <S-H> :tabprev<CR>
+nnoremap <S-L> :tabnext<CR>
