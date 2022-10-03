@@ -95,9 +95,6 @@ let g:markdown_fenced_languages = ['python', 'julia', 'bash', 'javascript', 'rus
 " fish correction
 set shell=/bin/bash
 
-" pathogen
-execute pathogen#infect()
-
 " syntax enabling
 syntax enable
 filetype plugin indent on
