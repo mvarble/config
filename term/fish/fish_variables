@@ -1,5 +1,9 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
+SETUVAR --export --path GOPATH:/home/mvarble/\x2ego
+SETUVAR --export NODE_OPTIONS:\x2d\x2dmax_old_space_size\x3d8192
+SETUVAR --export --path PATH:/home/mvarble/\x2enpm\x2dglobal/bin\x1e/usr/local/sbin\x1e/usr/local/bin\x1e/usr/sbin\x1e/usr/bin\x1e/sbin\x1e/bin\x1e/usr/games\x1e/usr/local/games\x1e/usr/lib/wsl/lib\x1e/mnt/c/WINDOWS/system32\x1e/mnt/c/WINDOWS\x1e/mnt/c/WINDOWS/System32/Wbem\x1e/mnt/c/WINDOWS/System32/WindowsPowerShell/v1\x2e0/\x1e/mnt/c/ProgramData/chocolatey\x1e/mnt/c/Program\x20Files/sioyek\x1e/mnt/c/Program\x20Files/PuTTY/\x1e/mnt/c/Users/mvarble/AppData/Local/Microsoft/WindowsApps
+SETUVAR --export TERM:xterm\x2d256color
 SETUVAR __fish_initialized:3400
 SETUVAR fish_color_autosuggestion:747369
 SETUVAR fish_color_cancel:\x2dr

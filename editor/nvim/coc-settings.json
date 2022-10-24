@@ -1,5 +1,8 @@
 {
   "suggest.noselect": true,
+  "diagnostic.floatConfig": {
+    "focusable": false
+  },
   "ltex.dictionary":{
     "en-US": [
       "Borel",
@@ -48,11 +51,13 @@
       "parameterization",
       "parameterizations",
       "pseudoinverse",
+      "quaternion",
       "supremum",
       "summand",
       "uniform-boundedness",
       "uniform-integrability",
       "uniformly-integrable"
     ]
-  }
+  },
+  "clangd.path": "/home/mvarble/config/editor/coc/extensions/coc-clangd-data/install/15.0.3/clangd_15.0.3/bin/clangd"
 }
