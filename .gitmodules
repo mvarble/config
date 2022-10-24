@@ -10,3 +10,6 @@
 [submodule "term/tmux/plugins/tpm"]
 	path = term/tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm.git
+[submodule "term/fish/fundle/danhper/fish-ssh-agent"]
+	path = term/fish/fundle/danhper/fish-ssh-agent
+	url = https://github.com/danhper/fish-ssh-agent.git
