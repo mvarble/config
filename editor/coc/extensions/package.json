@@ -4,7 +4,6 @@
     "coc-cssmodules": ">=1.1.1",
     "coc-html": ">=1.7.0",
     "coc-json": ">=1.6.1",
-    "coc-julia": ">=0.13.1",
     "coc-ltex": ">=13.1.0",
     "coc-rust-analyzer": ">=0.69.1",
     "coc-tailwindcss": ">=0.7.0",
