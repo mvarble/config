@@ -1,1 +1,1 @@
-nmap <C-T> :!python3 % <CR>
+nmap \r :!python3 % <CR>
