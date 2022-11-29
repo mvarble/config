@@ -1,9 +1,3 @@
-# start ssh server on login
-sudo service ssh start &>/dev/null
-
-# bind data sharing on login
-/usr/local/bin/share-data.sh
-
 # variables for software versions
 set NODE_VERSION 16.14.0
 set JULIA_VERSION 1.7.2
