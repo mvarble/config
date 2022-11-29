@@ -78,8 +78,4 @@ cursor:
     blinking: Off
 
 shell:
-  program: fish
-  args:
-    - -l
-    - -c
-    - tmux
+  program: tmux
