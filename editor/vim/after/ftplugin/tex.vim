@@ -1,13 +1,13 @@
 scriptencoding=utf-8
 
-"compile with CTRL+T
-nmap <C-T> :!pdflatex % <CR>
+"compile with \t
+nmap \t :!pdflatex % <CR>
 
-"bibtex with CTRL+B
-nmap <C-B> :!bibtex %:r <CR>
+"bibtex with \b
+nmap \b :!bibtex %:r <CR>
 
-"open pdf with CTRL+U
-nmap <C-P> :!xdg-open %:r.pdf &>/dev/null & disown <CR>
+"open pdf with \p
+nmap \p :!xdg-open %:r.pdf &>/dev/null & disown <CR>
 
 "word wrap nicely
 set breakindent
