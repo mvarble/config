@@ -59,5 +59,6 @@
       "uniformly-integrable"
     ]
   },
-  "clangd.path": "/home/mvarble/config/editor/coc/extensions/coc-clangd-data/install/15.0.3/clangd_15.0.3/bin/clangd"
+  "clangd.path": "/home/mvarble/config/editor/coc/extensions/coc-clangd-data/install/15.0.3/clangd_15.0.3/bin/clangd",
+  "rust-analyzer.checkOnSave.target": []
 }
