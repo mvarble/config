@@ -15,6 +15,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'wuelnerdotexe/vim-astro'
 Plug 'othree/html5.vim'
 Plug 'evanleck/vim-svelte', {'branch': 'main'}
+Plug 'Konstruktionist/vim-fish'
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 
 " ui
