@@ -88,7 +88,7 @@ filetype plugin indent on
 set t_Co=256
 let base16colorspace=256
 colorscheme base16-tomorrow-night-eighties
-#hi Normal ctermbg=236 guibg=NONE # slightly different background than shell
+" hi Normal ctermbg=236 guibg=NONE "slightly different background than shell
 
 " mouse scrolling
 set mouse=a
