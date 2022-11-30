@@ -1,3 +1,6 @@
+sudo service ssh start &>/dev/null
+/usr/local/bin/share-data.sh
+
 # zplug
 source ~/.zplug/init.zsh
 zplug "mafredri/zsh-async", from:github, defer:0
