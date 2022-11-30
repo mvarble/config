@@ -86,9 +86,9 @@ filetype plugin indent on
 
 " colorscheme
 set t_Co=256
-let base16colorspace=256 
-colorscheme base16-ocean
-hi Normal ctermbg=NONE guibg=NONE
+let base16colorspace=256
+colorscheme base16-tomorrow-night-eighties
+#hi Normal ctermbg=236 guibg=NONE # slightly different background than shell
 
 " mouse scrolling
 set mouse=a
