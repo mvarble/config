@@ -92,10 +92,10 @@ imap <LeftMouse> <nop>
 "vmap <LeftMouse> <nop>
 
 " remap split navigation
-nmap <silent> gh :wincmd h <CR>
-nmap <silent> gj :wincmd j <CR>
-nmap <silent> gk :wincmd k <CR>
-nmap <silent> gl :wincmd l <CR>
+nmap gh :wincmd h <CR>
+nmap gj :wincmd j <CR>
+nmap gk :wincmd k <CR>
+nmap gl :wincmd l <CR>
 
 " syntastic
 set statusline+=%#warningmsg#
