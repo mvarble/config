@@ -160,6 +160,8 @@ let g:vimtex_view_method = 'sioyek'
 
 " NERDTree
 nnoremap <C-f> :NERDTreeTabsToggle<CR>
+let NERDTreeMapActivateNode = 'l'
+let NERDTreeMapPreview = 'go'
 
 " tabs
 nnoremap <C-d> :q<CR>
