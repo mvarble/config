@@ -25,6 +25,7 @@ vim.api.nvim_create_autocmd('QuitPre', {
 })
 
 -- clear background
+vim.g.transparency = true
 
 -- enable python provider
 vim.g.loaded_python3_provider=nil

@@ -16,3 +16,6 @@
 [submodule "term/tmux/plugins/base16-tmux"]
 	path = term/tmux/plugins/base16-tmux
 	url = https://github.com/tinted-theming/base16-tmux.git
+[submodule "editor/nvim"]
+	path = editor/nvim
+	url = https://github.com/NvChad/NvChad
