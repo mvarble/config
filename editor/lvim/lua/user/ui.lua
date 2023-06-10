@@ -7,3 +7,6 @@ lvim.colorscheme = 'base16-tomorrow-night'
 vim.opt.cursorline = false
 vim.o.hlsearch = false
 vim.wo.relativenumber = true
+
+-- fix the LSP highlighting
+vim.highlight.priorities.semantic_tokens = 95
