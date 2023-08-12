@@ -12,6 +12,7 @@ set -x PATH ~/.cargo/bin $PATH
 set -x PATH ~/.npm-global/bin $PATH
 set -x PATH ~/.local/bin $PATH
 set -x PATH /opt/neovim/bin $PATH
+set -x PATH ~/.miniconda3/bin $PATH
 
 # set editor to neovim and alias
 set -x EDITOR lvim
@@ -33,4 +34,13 @@ end
 
 # plugins
 fundle plugin 'danhper/fish-ssh-agent'
+fundle plugin 'edc/bass'
 fundle init
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+if test -f /home/mvarble/.miniconda3/bin/conda
+    eval /home/mvarble/.miniconda3/bin/conda "shell.fish" "hook" $argv | source
+end
+# <<< conda initialize <<<
+
