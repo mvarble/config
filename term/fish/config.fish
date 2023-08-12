@@ -13,6 +13,7 @@ set -x PATH ~/.npm-global/bin $PATH
 set -x PATH ~/.local/bin $PATH
 set -x PATH /opt/neovim/bin $PATH
 set -x PATH ~/.miniconda3/bin $PATH
+set -x PATH /usr/local/cuda-12.2/bin $PATH
 
 # set editor to neovim and alias
 set -x EDITOR lvim
