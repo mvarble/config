@@ -6,7 +6,7 @@ vim.api.nvim_create_autocmd("QuitPre", {
     for _, w in ipairs(wins) do
       local bufname = vim.api.nvim_buf_get_name(vim.api.nvim_win_get_buf(w))
       if bufname:match('NvimTree_') ~= nil then
-	table.insert(invalid_win, w)
+        table.insert(invalid_win, w)
       end
     end
     if #invalid_win == #wins - 1 then
@@ -35,4 +35,3 @@ lvim.builtin.nvimtree.setup.on_attach = function(bufnr)
   vim.keymap.set('n', 'o', api.node.open.vertical, opts('Open: Vertical Split'))
   vim.keymap.set('n', 'i', api.node.open.horizontal, opts('Open: Horizontal Split'))
 end
-
