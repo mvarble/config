@@ -16,3 +16,6 @@
 [submodule "term/tmux/plugins/base16-tmux"]
 	path = term/tmux/plugins/base16-tmux
 	url = https://github.com/tinted-theming/base16-tmux.git
+[submodule "term/fish/fundle/edc/bass"]
+	path = term/fish/fundle/edc/bass
+	url = https://github.com/edc/bass.git
