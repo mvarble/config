@@ -19,7 +19,9 @@ vim.g.markdown_fenced_languages = {
 }
 
 -- user configuration
+lvim.builtin.autopairs.active = false
 reload("user.lsp.init")
+reload("user.project")
 reload("user.ui")
 reload("user.spacing")
 reload("user.nvim-tree")

@@ -10,3 +10,6 @@ vim.wo.relativenumber = true
 
 -- fix the LSP highlighting
 vim.highlight.priorities.semantic_tokens = 95
+
+-- wrap
+vim.wo.wrap = true
