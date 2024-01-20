@@ -1,5 +1,8 @@
 -- plugins
-table.insert(lvim.plugins, { 'RRethy/nvim-base16' })
+table.insert(lvim.plugins, {
+  'RRethy/nvim-base16',
+  'brenoprata10/nvim-highlight-colors'
+})
 
 -- various UI properties
 lvim.transparent_window = true
@@ -13,3 +16,8 @@ vim.highlight.priorities.semantic_tokens = 95
 
 -- wrap
 vim.wo.wrap = true
+
+-- color highlighting
+vim.o.termguicolor = true
+vim.o.t_Co = 256
+require('nvim-highlight-colors').setup {}
