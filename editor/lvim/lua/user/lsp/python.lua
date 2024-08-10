@@ -6,7 +6,7 @@ table.insert(lvim.plugins, { 'bfredl/nvim-ipy' })
 
 -- formatter
 local formatters = require "lvim.lsp.null-ls.formatters"
-formatters.setup { { name = "black" } }
+formatters.setup { { name = "ruff" } }
 
 -- linter
 local linters = require "lvim.lsp.null-ls.linters"
