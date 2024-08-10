@@ -16,6 +16,7 @@ vim.g.markdown_fenced_languages = {
   'rust',
   'cpp',
   'cmake',
+  'json',
 }
 
 -- user configuration

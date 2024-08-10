@@ -6,7 +6,7 @@ table.insert(lvim.plugins, {
 
 -- various UI properties
 lvim.transparent_window = true
-lvim.colorscheme = 'base16-tomorrow-night'
+lvim.colorscheme = 'base16-tomorrow-night-eighties'
 vim.opt.cursorline = false
 vim.o.hlsearch = false
 vim.wo.relativenumber = true
