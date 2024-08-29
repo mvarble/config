@@ -6,14 +6,10 @@ set JULIA_VERSION 1.8.3
 set fish_greeting
 
 # update PATH
-set -x PATH ~/.node-v$NODE_VERSION/bin $PATH
-set -x PATH ~/.julia-$JULIA_VERSION/bin $PATH
 set -x PATH ~/.cargo/bin $PATH
 set -x PATH ~/.npm-global/bin $PATH
 set -x PATH ~/.local/bin $PATH
-set -x PATH /opt/neovim/bin $PATH
-set -x PATH ~/.miniconda3/bin $PATH
-set -x PATH /usr/local/cuda-12.2/bin $PATH
+set -x PATH ~/.pixi/bin $PATH
 
 # set editor to neovim and alias
 set -x EDITOR lvim
@@ -37,11 +33,3 @@ end
 fundle plugin 'danhper/fish-ssh-agent'
 fundle plugin 'edc/bass'
 fundle init
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-if test -f /home/mvarble/.miniconda3/bin/conda
-    eval /home/mvarble/.miniconda3/bin/conda "shell.fish" "hook" $argv | source
-end
-# <<< conda initialize <<<
-
