@@ -1,4 +1,5 @@
 require("user.keybindings")
 require("user.spacing")
 require("user.ui")
+require("user.format")
 require("user.lazy")
