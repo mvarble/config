@@ -15,18 +15,5 @@ return {
 			})
 		end,
 	},
-	{
-		"mrcjkb/rustaceanvim",
-		version = "^5",
-		config = function()
-			vim.g.rustaceanvim = {
-				default_settings = {
-					["rust-analyzer"] = {
-						diagnostics = { enable = false },
-						checkOnSave = { enable = false },
-					},
-				},
-			}
-		end,
-	},
+	{ "mrcjkb/rustaceanvim", version = "^5" },
 }
