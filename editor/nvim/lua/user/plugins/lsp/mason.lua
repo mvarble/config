@@ -51,7 +51,6 @@ return {
 
 		mason_tool_installer.setup({
 			ensure_installed = {
-				"actionlint",
 				"astro-language-server",
 				"bacon-ls",
 				"buf",
@@ -74,7 +73,6 @@ return {
 				"stylua",
 				"svelte-language-server",
 				"taplo",
-				"yq",
 				"yaml-language-server",
 				"yamllint",
 			},
