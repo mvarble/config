@@ -19,5 +19,4 @@ vim.wo.wrap = true
 
 -- color highlighting
 vim.o.termguicolor = true
-vim.o.t_Co = 256
 require('nvim-highlight-colors').setup {}
