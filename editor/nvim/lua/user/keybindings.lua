@@ -2,6 +2,12 @@
 vim.g.mapleader = "\\"
 vim.g.maplocalleader = "\\"
 
+-- window sizing
+vim.keymap.set({ "n", "i", "v" }, "<C-Left>", ":vertical resize -1 <CR>", { desc = "shrink window horizontally" })
+vim.keymap.set({ "n", "i", "v" }, "<C-Right>", ":vertical resize +1 <CR>", { desc = "grow window horizontally" })
+vim.keymap.set({ "n", "i", "v" }, "<C-Up>", ":resize -1 <CR>", { desc = "shrink window vertically" })
+vim.keymap.set({ "n", "i", "v" }, "<C-Down>", ":resize +1 <CR>", { desc = "grow window vertically" })
+
 -- window navigation
 vim.keymap.set("n", "gh", ":wincmd h <CR>", { desc = "navigate window left" })
 vim.keymap.set("n", "gj", ":wincmd j <CR>", { desc = "navigate window down" })
