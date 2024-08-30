@@ -22,3 +22,8 @@ vim.keymap.set("n", "<C-d>", ":bp<bar>sp<bar>bn<bar>bd<CR> <CR>", { desc = "clos
 -- closing windows
 vim.keymap.set("n", "<leader>q", ":q <CR>", { desc = "quit" })
 vim.keymap.set("n", "<leader>Q", ":qa <CR>", { desc = "quit all" })
+
+-- lsp inlay hiding
+vim.keymap.set({ "n", "v" }, "<C-i>", function()
+	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end, { desc = "toggle LSP inlay hinting" })

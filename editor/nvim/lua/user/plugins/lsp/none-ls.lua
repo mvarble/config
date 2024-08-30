@@ -11,7 +11,6 @@ return {
 				require("none-ls.code_actions.eslint_d"),
 
 				-- diagnostics
-				null_ls.builtins.diagnostics.actionlint,
 				null_ls.builtins.diagnostics.buf,
 				null_ls.builtins.diagnostics.cmake_lint,
 				require("none-ls.diagnostics.eslint_d"),
@@ -37,7 +36,6 @@ return {
 				null_ls.builtins.formatting.tidy,
 				require("none-ls.formatting.trim_newlines"),
 				require("none-ls.formatting.trim_whitespace"),
-				require("none-ls.formatting.yq"),
 			},
 		})
 	end,

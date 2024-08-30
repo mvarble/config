@@ -1,5 +1,14 @@
 local M = {}
 
+function M.clear_augroup(name)
+	-- defer the function in case the autocommand is still in-use
+	vim.schedule(function()
+		pcall(function()
+			vim.api.nvim_clear_autocmds({ group = name })
+		end)
+	end)
+end
+
 function M.format_filter(client)
 	local filetype = vim.bo.filetype
 	local n = require("null-ls")
