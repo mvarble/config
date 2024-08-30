@@ -14,7 +14,6 @@ return {
 				null_ls.builtins.diagnostics.actionlint,
 				null_ls.builtins.diagnostics.buf,
 				null_ls.builtins.diagnostics.cmake_lint,
-				null_ls.builtins.diagnostics.codespell,
 				require("none-ls.diagnostics.eslint_d"),
 				null_ls.builtins.diagnostics.fish,
 				null_ls.builtins.diagnostics.markdownlint_cli2,
