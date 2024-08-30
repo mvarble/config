@@ -59,7 +59,6 @@ return {
 				"clangd",
 				"cmakelint",
 				"cmakelang",
-				"codespell",
 				"dockerls",
 				"eslint_d",
 				"gitlab-ci-ls",
