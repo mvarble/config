@@ -15,7 +15,6 @@ return {
 				null_ls.builtins.diagnostics.cmake_lint,
 				require("none-ls.diagnostics.eslint_d"),
 				null_ls.builtins.diagnostics.fish,
-				null_ls.builtins.diagnostics.markdownlint_cli2,
 				null_ls.builtins.diagnostics.tidy,
 				null_ls.builtins.diagnostics.yamllint,
 
@@ -29,7 +28,6 @@ return {
 				require("none-ls.formatting.eslint_d"),
 				null_ls.builtins.formatting.fish_indent,
 				require("none-ls.formatting.jq"),
-				null_ls.builtins.formatting.mdformat,
 				null_ls.builtins.formatting.prettierd,
 				require("none-ls.formatting.rustfmt"),
 				null_ls.builtins.formatting.stylua,

@@ -11,19 +11,13 @@ local languages = {
 	"javascript",
 	"json",
 	"lua",
-	"markdown",
-	"markdown_inline",
-	"query",
 	"rust",
-	"svelte",
 	"toml",
-	"tsx",
 	"typescript",
-	"vim",
-	"vimdoc",
 	"yaml",
 }
 vim.g.markdown_fenced_languages = languages
+
 return {
 	"nvim-treesitter/nvim-treesitter",
 	event = { "BufReadPre", "BufNewFile" },

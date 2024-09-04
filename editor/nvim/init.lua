@@ -1,7 +1,3 @@
 require("user.keybindings")
-require("user.spacing")
-require("user.ui")
-require("user.format")
-require("user.lsp")
-require("user.history")
 require("user.lazy")
+require("user.etc")
