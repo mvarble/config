@@ -65,8 +65,6 @@ return {
 				"json-lsp",
 				"julia-lsp",
 				"lua-language-server",
-				"markdownlint-cli2",
-				"mdformat",
 				"prettierd",
 				"ruff-lsp",
 				"sqlls",
