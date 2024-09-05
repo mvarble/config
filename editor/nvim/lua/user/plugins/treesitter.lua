@@ -11,6 +11,7 @@ local languages = {
 	"javascript",
 	"json",
 	"lua",
+	"python",
 	"rust",
 	"toml",
 	"typescript",
