@@ -68,5 +68,4 @@ function M.toggle_format_on_save()
 	end
 end
 
-M.enable_format_on_save()
-vim.api.nvim_create_user_command("ToggleFormatOnSave", M.toggle_format_on_save, {})
+return M
