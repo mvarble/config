@@ -10,8 +10,6 @@ return {
 	},
 	config = function()
 		local telescope = require("telescope")
-		local actions = require("telescope.actions")
-		local transform_mod = require("telescope.actions.mt").transform_mod
 
 		require("project_nvim").setup({ patterns = { ".git" } })
 

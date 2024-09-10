@@ -15,7 +15,6 @@ return {
 				null_ls.builtins.diagnostics.cmake_lint,
 				require("none-ls.diagnostics.eslint_d"),
 				null_ls.builtins.diagnostics.fish,
-				null_ls.builtins.diagnostics.tidy,
 				null_ls.builtins.diagnostics.yamllint,
 
 				-- formatting
@@ -31,7 +30,6 @@ return {
 				null_ls.builtins.formatting.prettierd,
 				require("none-ls.formatting.rustfmt"),
 				null_ls.builtins.formatting.stylua,
-				null_ls.builtins.formatting.tidy,
 				require("none-ls.formatting.trim_newlines"),
 				require("none-ls.formatting.trim_whitespace"),
 			},
