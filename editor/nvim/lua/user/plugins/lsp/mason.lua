@@ -43,6 +43,7 @@ return {
 				"ruff_lsp",
 				"sqlls",
 				"taplo",
+				"ts_ls",
 				-- TODO: see about installing this.
 				-- "tabby_ml",
 				"yamlls",
@@ -70,6 +71,7 @@ return {
 				"sqlls",
 				"stylua",
 				"svelte-language-server",
+				"typescript-language-server",
 				"taplo",
 				"yaml-language-server",
 				"yamllint",
