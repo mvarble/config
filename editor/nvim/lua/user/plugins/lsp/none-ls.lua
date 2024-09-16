@@ -28,7 +28,9 @@ return {
 				null_ls.builtins.formatting.fish_indent,
 				require("none-ls.formatting.jq"),
 				null_ls.builtins.formatting.prettierd,
-				require("none-ls.formatting.rustfmt"),
+				require("none-ls.formatting.rustfmt").with({
+					extra_args = { "--edition", "2018" },
+				}),
 				null_ls.builtins.formatting.stylua,
 				require("none-ls.formatting.trim_newlines"),
 				require("none-ls.formatting.trim_whitespace"),
