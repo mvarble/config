@@ -11,7 +11,10 @@ return {
 	config = function()
 		local telescope = require("telescope")
 
-		require("project_nvim").setup({ patterns = { ".git" } })
+		require("project_nvim").setup({
+			detection_methods = { "pattern" },
+			patterns = { ".git" },
+		})
 
 		telescope.setup({
 			defaults = {
