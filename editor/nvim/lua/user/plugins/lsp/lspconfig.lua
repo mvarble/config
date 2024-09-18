@@ -21,26 +21,37 @@ return {
 					filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "h", "hpp" },
 				})
 			end,
-		})
-
-		lspconfig.lua_ls.setup({
-			capabilities = capabilities,
-			on_init = function(client)
-				client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
-					runtime = {
-						version = "LuaJIT",
-					},
-					workspace = {
-						checkThirdParty = false,
-						library = {
-							vim.env.VIMRUNTIME,
-						},
+			lua_ls = function()
+				lspconfig.lua_ls.setup({
+					capabilities = capabilities,
+					on_init = function(client)
+						client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+							runtime = {
+								version = "LuaJIT",
+							},
+							workspace = {
+								checkThirdParty = false,
+								library = {
+									vim.env.VIMRUNTIME,
+								},
+							},
+						})
+					end,
+					settings = {
+						Lua = {},
 					},
 				})
 			end,
-			settings = {
-				Lua = {},
-			},
+			ruff_lsp = function()
+				lspconfig.ruff_lsp.setup({
+					capabilities = capabilities,
+					on_attach = function(client)
+						if client.name == "ruff_lsp" then
+							client.server_capabilities.hoverProvider = false
+						end
+					end,
+				})
+			end,
 		})
 
 		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
