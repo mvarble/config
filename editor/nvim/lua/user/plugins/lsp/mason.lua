@@ -27,8 +27,6 @@ return {
 		mason_lspconfig.setup({
 			ensure_installed = {
 				"astro",
-				-- not yet in the mason-lspconfig package
-				-- "bacon_ls",
 				"clangd",
 				"cmake",
 				"cssls",
@@ -54,7 +52,6 @@ return {
 		mason_tool_installer.setup({
 			ensure_installed = {
 				"astro-language-server",
-				"bacon-ls",
 				"buf",
 				"clang-format",
 				"clangd",
