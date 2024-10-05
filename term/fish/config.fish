@@ -6,6 +6,7 @@ fish_add_path ~/.cargo/bin
 fish_add_path ~/.npm/bin
 fish_add_path ~/.local/bin
 fish_add_path ~/.pixi/bin
+fish_add_path ~/.local/share/commands
 
 # set editor to neovim and alias
 set -x EDITOR nvim
