@@ -25,5 +25,5 @@ vim.keymap.set("n", "<leader>Q", ":qa <CR>", { desc = "quit all" })
 
 -- lsp inlay hiding
 vim.keymap.set({ "n", "v" }, "<C-i>", function()
-	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end, { desc = "toggle LSP inlay hinting" })
