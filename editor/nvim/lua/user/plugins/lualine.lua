@@ -93,11 +93,12 @@ return {
         local colorscheme = require("base16-colorscheme").colors
 
         local colors = {
-            normal = colorscheme.base0C,
-            insert = colorscheme.base0B,
-            violet = colorscheme.base03,
-            command = colorscheme.base0A,
-            replace = colorscheme.base09,
+            cyan = colorscheme.base0C,
+            green = colorscheme.base0B,
+            violet = colorscheme.base0E,
+            red = colorscheme.base08,
+            yellow = colorscheme.base0A,
+            orange = colorscheme.base09,
             fg = colorscheme.base05,
             bg = colorscheme.base02,
             inactive_fg = colorscheme.base04,
@@ -116,12 +117,17 @@ return {
             options = {
                 theme = {
                     normal = {
-                        a = { bg = colors.normal, fg = colors.bg, gui = "bold" },
+                        a = { bg = colors.cyan, fg = colors.bg, gui = "bold" },
+                        b = { bg = colors.bg, fg = colors.fg },
+                        c = { bg = colors.bg, fg = colors.fg },
+                    },
+                    terminal = {
+                        a = { bg = colors.red, fg = colors.bg, gui = "bold" },
                         b = { bg = colors.bg, fg = colors.fg },
                         c = { bg = colors.bg, fg = colors.fg },
                     },
                     insert = {
-                        a = { bg = colors.insert, fg = colors.bg, gui = "bold" },
+                        a = { bg = colors.green, fg = colors.bg, gui = "bold" },
                         b = { bg = colors.bg, fg = colors.fg },
                         c = { bg = colors.bg, fg = colors.fg },
                     },
@@ -131,12 +137,12 @@ return {
                         c = { bg = colors.bg, fg = colors.fg },
                     },
                     command = {
-                        a = { bg = colors.command, fg = colors.bg, gui = "bold" },
+                        a = { bg = colors.yellow, fg = colors.bg, gui = "bold" },
                         b = { bg = colors.bg, fg = colors.fg },
                         c = { bg = colors.bg, fg = colors.fg },
                     },
                     replace = {
-                        a = { bg = colors.replace, fg = colors.bg, gui = "bold" },
+                        a = { bg = colors.orange, fg = colors.bg, gui = "bold" },
                         b = { bg = colors.bg, fg = colors.fg },
                         c = { bg = colors.bg, fg = colors.fg },
                     },
