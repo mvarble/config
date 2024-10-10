@@ -15,6 +15,7 @@ return {
                 null_ls.builtins.diagnostics.cmake_lint,
                 require("none-ls.diagnostics.eslint_d"),
                 null_ls.builtins.diagnostics.fish,
+                require("none-ls.diagnostics.ruff"),
                 null_ls.builtins.diagnostics.yamllint,
 
                 -- formatting
@@ -28,6 +29,8 @@ return {
                 null_ls.builtins.formatting.fish_indent,
                 require("none-ls.formatting.jq"),
                 null_ls.builtins.formatting.prettierd,
+                require("none-ls.formatting.ruff"),
+                require("none-ls.formatting.ruff_format"),
                 require("none-ls.formatting.rustfmt").with({
                     extra_args = { "--edition", "2018" },
                 }),
