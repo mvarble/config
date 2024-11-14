@@ -42,11 +42,11 @@ return {
                     },
                 })
             end,
-            ruff_lsp = function()
-                lspconfig.ruff_lsp.setup({
+            ruff = function()
+                lspconfig.ruff.setup({
                     capabilities = capabilities,
                     on_attach = function(client)
-                        if client.name == "ruff_lsp" then
+                        if client.name == "ruff" then
                             client.server_capabilities.hoverProvider = false
                         end
                     end,

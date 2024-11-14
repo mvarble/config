@@ -39,12 +39,10 @@ return {
                 "julials",
                 "lua_ls",
                 "pyright",
-                "ruff_lsp",
+                "ruff",
                 "sqlls",
                 "taplo",
                 "ts_ls",
-                -- TODO: see about installing this.
-                -- "tabby_ml",
                 "yamlls",
             },
         })
@@ -66,7 +64,7 @@ return {
                 "lua-language-server",
                 "prettierd",
                 "pyright",
-                "ruff-lsp",
+                "ruff",
                 "sqlls",
                 "stylua",
                 "svelte-language-server",
