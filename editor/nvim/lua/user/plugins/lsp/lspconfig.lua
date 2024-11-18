@@ -42,6 +42,16 @@ return {
                     },
                 })
             end,
+            ruff = function()
+                lspconfig.ruff.setup({
+                    capabilities = capabilities,
+                    on_attach = function(client)
+                        if client.name == "ruff" then
+                            client.server_capabilities.hoverProvider = false
+                        end
+                    end,
+                })
+            end,
         })
 
         local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
