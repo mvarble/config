@@ -39,11 +39,10 @@ return {
                 "julials",
                 "lua_ls",
                 "pyright",
+                "ruff",
                 "sqlls",
                 "taplo",
                 "ts_ls",
-                -- TODO: see about installing this.
-                -- "tabby_ml",
                 "yamlls",
             },
         })

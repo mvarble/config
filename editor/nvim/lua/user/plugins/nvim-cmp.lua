@@ -11,6 +11,7 @@ return {
     config = function()
         local cmp = require("cmp")
         local lspkind = require("lspkind")
+
         cmp.setup({
             enabled = true,
             performance = {
@@ -43,13 +44,15 @@ return {
             },
             preselect = cmp.PreselectMode.None,
             completion = {
-                -- keyword_length = 4,
                 completeopt = "menuone,noselect",
             },
             formatting = {
                 format = lspkind.cmp_format({
                     maxwidth = 30,
                     ellipsis_char = "...",
+                    symbol_map = {
+                        Tabby = "🐈",
+                    },
                 }),
             },
             matching = {
@@ -64,6 +67,7 @@ return {
                 { name = "nvim_lsp" },
                 { name = "buffer" },
                 { name = "path" },
+                { name = "cmp_ai" },
             }),
             view = {
                 docs = {
@@ -73,6 +77,9 @@ return {
             window = {
                 completion = cmp.config.window.bordered(),
                 documentation = cmp.config.window.bordered(),
+            },
+            experimental = {
+                ghost_text = true,
             },
         })
     end,
