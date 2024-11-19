@@ -82,5 +82,12 @@ return {
                 ghost_text = true,
             },
         })
+
+        vim.api.nvim_create_autocmd("FileType", {
+            pattern = "TelescopePrompt",
+            callback = function()
+                cmp.setup.buffer({ completion = { autocomplete = false } })
+            end,
+        })
     end,
 }
