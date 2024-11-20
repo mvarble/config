@@ -50,9 +50,6 @@ return {
                 format = lspkind.cmp_format({
                     maxwidth = 30,
                     ellipsis_char = "...",
-                    symbol_map = {
-                        Tabby = "🐈",
-                    },
                 }),
             },
             matching = {
@@ -67,7 +64,6 @@ return {
                 { name = "nvim_lsp" },
                 { name = "buffer" },
                 { name = "path" },
-                { name = "cmp_ai" },
             }),
             view = {
                 docs = {
