@@ -23,7 +23,6 @@ return {
                 null_ls.builtins.formatting.clang_format.with({
                     filetypes = { "c", "cpp", "h", "hpp", "cuda" },
                 }),
-                null_ls.builtins.formatting.cmake_format,
                 null_ls.builtins.formatting.d2_fmt,
                 require("none-ls.formatting.eslint_d"),
                 null_ls.builtins.formatting.fish_indent,
