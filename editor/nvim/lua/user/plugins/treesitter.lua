@@ -13,6 +13,7 @@ local languages = {
     "lua",
     "python",
     "rust",
+    "svelte",
     "toml",
     "typescript",
     "yaml",
