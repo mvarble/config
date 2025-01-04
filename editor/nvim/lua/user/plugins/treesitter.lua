@@ -18,7 +18,6 @@ local languages = {
     "typescript",
     "yaml",
 }
-vim.g.markdown_fenced_languages = languages
 
 return {
     "nvim-treesitter/nvim-treesitter",
