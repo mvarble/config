@@ -1,3 +1,6 @@
+-- exit terminal with escape
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { silent = true })
+
 -- set the leader to `\`
 vim.g.mapleader = "\\"
 vim.g.maplocalleader = "\\"

@@ -20,9 +20,6 @@ if status --is-interactive
     source "$BASE16_SHELL/profile_helper.fish"
 end
 
-# set python to a virtual environment so that I can install packages
-source ~/.env/bin/activate.fish
-
 # plugins
 fundle plugin danhper/fish-ssh-agent
 fundle plugin edc/bass

@@ -1,6 +1,3 @@
--- python host
-vim.g.python3_host_prog = "/home/mvarble/.env/bin/python"
-
 -- undo history
 vim.o.undofile = true
 
