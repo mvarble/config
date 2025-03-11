@@ -26,7 +26,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     event = { "BufReadPre", "BufNewFile" },
     build = ":TSUpdate",
-    dependencies = { "windwp/nvim-ts-autotag" },
+    dependencies = { "windwp/nvim-ts-autotag", "RRethy/base16-nvim" },
     config = function()
         local treesitter = require("nvim-treesitter.configs")
         treesitter.setup({
@@ -48,5 +48,30 @@ return {
                 },
             },
         })
+
+        -- Treat $$ as latex in Markdown
+        vim.api.nvim_set_hl(0, "@latex", { link = "Special" })
+        vim.api.nvim_create_autocmd("BufRead", {
+            pattern = { "*.md", "*.svx" },
+            callback = function()
+                vim.cmd([[
+                    syntax region texMath start=/\v^\$\$/ end=/\v\$\$$/ contains=texZone
+                    highlight link texMath Special
+                ]])
+            end,
+        })
+
+        -- add colors to headers in Markdown
+        local orange = require("base16-colorscheme").colors.base09
+        local yellow = require("base16-colorscheme").colors.base0A
+        vim.api.nvim_set_hl(0, "@header.h1", { fg = orange, bold = true })
+        vim.api.nvim_set_hl(0, "@header.h2", { fg = orange, bold = true })
+        vim.api.nvim_set_hl(0, "@header.h3", { fg = orange, bold = true })
+        vim.api.nvim_set_hl(0, "@header.h4", { fg = orange, bold = true })
+        vim.api.nvim_set_hl(0, "@header.h5", { fg = orange, bold = true })
+        vim.api.nvim_set_hl(0, "@header.h6", { fg = orange, bold = true })
+
+        -- add colors to line-items in Markdown
+        vim.api.nvim_set_hl(0, "@list", { fg = yellow, bold = true })
     end,
 }
