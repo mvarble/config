@@ -1,6 +1,52 @@
 -- undo history
 vim.o.undofile = true
 
+-- aichat
+local tui = {
+    buf = nil,
+    win = nil,
+}
+vim.keymap.set("n", "<leader>c", function()
+    -- If the window is open, close it
+    if tui.win and vim.api.nvim_win_is_valid(tui.win) then
+        vim.api.nvim_win_close(tui.win, false)
+        tui.win = nil
+        return
+    end
+
+    -- Reuse buffer if still valid
+    if tui.buf and vim.api.nvim_buf_is_valid(tui.buf) then
+        -- Find a place to put the window (bottom-left)
+        vim.cmd("botright 15split")
+        tui.win = vim.api.nvim_get_current_win()
+        vim.api.nvim_win_set_buf(tui.win, tui.buf)
+        vim.cmd("startinsert")
+        return
+    end
+
+    -- Create terminal buffer
+    tui.buf = vim.api.nvim_create_buf(false, true)
+
+    -- Open bottom split for it
+    vim.cmd("botright 15split")
+    tui.win = vim.api.nvim_get_current_win()
+    vim.api.nvim_win_set_buf(tui.win, tui.buf)
+
+    -- Launch aichat
+    vim.fn.termopen("aichat")
+
+    -- Buffer options
+    vim.schedule(function()
+        if vim.api.nvim_buf_is_valid(tui.buf) then
+            vim.bo[tui.buf].bufhidden = "hide"
+            vim.bo[tui.buf].buflisted = false
+            vim.bo[tui.buf].filetype = "aichat"
+        end
+    end)
+
+    vim.cmd("startinsert")
+end, { desc = "Open an AI chat in a window split." })
+
 -- formatting
 local formatting = require("user.utils.formatting")
 formatting.enable_format_on_save()
