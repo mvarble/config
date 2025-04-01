@@ -12,6 +12,6 @@ return {
             illuminate = true,
             dapui = true,
         })
-        vim.cmd([[colorscheme base16-tomorrow-night-eighties]])
+        vim.cmd("colorscheme base16-" .. os.getenv("BASE16_THEME"))
     end,
 }
