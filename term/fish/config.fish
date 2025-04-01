@@ -43,8 +43,8 @@ end
 # refresh tmux theme if it does not agree
 # TODO: find more efficient way of doing this... maybe look into tinted again
 set TMUX_THEME (tmux show-option -g @tinted-color | cut -d ' ' -f2 )
-if [ $TMUX_THEME != base16-$BASE16_THEME ]
-    tmux set -g @tinted-color base16-$BASE16_THEME
+if [ "$TMUX_THEME" != "base16-$BASE16_THEME" ]
+    tmux set -g @tinted-color "base16-$BASE16_THEME"
     tmux run '~/.tmux/plugins/tpm/tpm'
     tmux set -g mode-style 'bg=blue,fg=black'
     tmux set -g pane-active-border-style 'fg=blue'
