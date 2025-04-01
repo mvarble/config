@@ -68,6 +68,7 @@ return {
                 "sqlls",
                 "stylua",
                 "svelte-language-server",
+                "tree-sitter-cli",
                 "typescript-language-server",
                 "taplo",
                 "yaml-language-server",
