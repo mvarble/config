@@ -93,14 +93,14 @@ return {
         local colorscheme = require("base16-colorscheme").colors
 
         local colors = {
-            cyan = colorscheme.base0C,
+            cyan = colorscheme.base0D,
             green = colorscheme.base0B,
             violet = colorscheme.base0E,
             red = colorscheme.base08,
             yellow = colorscheme.base0A,
             orange = colorscheme.base09,
-            fg = colorscheme.base05,
-            bg = colorscheme.base02,
+            fg = colorscheme.base01,
+            bg = colorscheme.base06,
             inactive_fg = colorscheme.base04,
             inactive_bg = colorscheme.base01,
         }
