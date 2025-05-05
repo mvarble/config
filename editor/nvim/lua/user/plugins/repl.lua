@@ -18,7 +18,11 @@ return {
                     python = {
                         command = { "ipython", "--no-autoindent" },
                         format = common.bracketed_paste_python,
-                        block_deviders = { "# %%", "#%%", "##" },
+                        block_dividers = { "# %%", "#%%", "##" },
+                    },
+                    matlab = {
+                        command = { "octave" },
+                        block_dividers = { "%%" },
                     },
                 },
                 repl_filetype = function(bufnr, ft)
