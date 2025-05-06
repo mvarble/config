@@ -3,8 +3,8 @@ set fish_greeting
 
 # update PATH
 fish_add_path ~/.cargo/bin
-fish_add_path ~/.npm/bin
 fish_add_path ~/.local/bin
+fish_add_path ~/.local/share/fnm
 fish_add_path ~/.pixi/bin
 fish_add_path ~/.local/share/commands
 
@@ -34,8 +34,13 @@ fundle plugin danhper/fish-ssh-agent
 fundle plugin edc/bass
 fundle init
 
+# fnm
+if type -q fnm
+    fnm env | source
+end
+
 # pnpm
-set -gx PNPM_HOME "/home/mvarble/.local/share/pnpm"
+set -gx PNPM_HOME "~/.local/share/pnpm"
 if not string match -q -- $PNPM_HOME $PATH
     set -gx PATH "$PNPM_HOME" $PATH
 end
