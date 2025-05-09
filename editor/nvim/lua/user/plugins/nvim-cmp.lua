@@ -28,7 +28,10 @@ return {
                 ["<C-k>"] = cmp.mapping.scroll_docs(-4),
                 ["<C-j>"] = cmp.mapping.scroll_docs(4),
                 ["<C-e>"] = cmp.mapping.abort(),
-                ["<CR>"] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Insert }),
+                ["<CR>"] = cmp.mapping.confirm({
+                    select = false,
+                    behavior = cmp.ConfirmBehavior.Insert,
+                }),
                 ["<C-]>"] = function()
                     if cmp.visible_docs() then
                         cmp.close_docs()

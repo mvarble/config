@@ -6,15 +6,39 @@ return {
             config = function()
                 -- Configure DAP commands
                 local dap = require("dap")
+
+                dap.adapters.gdb = {
+                    type = "executable",
+                    command = "gdb",
+                    args = { "--interpreter=dap", "--eval-command", "set print pretty on" },
+                }
+
                 dap.configurations.python = {
                     {
+                        name = "Launch file",
                         type = "python",
                         request = "launch",
-                        name = "Launch file",
                         program = "${file}",
                         justMyCode = false,
                     },
                 }
+
+                local gdb_config = {
+                    {
+                        name = "Launch",
+                        type = "gdb",
+                        request = "launch",
+                        program = function()
+                            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+                        end,
+                        cwd = "${workspaceFolder}",
+                        stopAtBeginningOfMainSubprogram = true,
+                    },
+                }
+
+                dap.configurations.c = gdb_config
+                dap.configurations.cpp = gdb_config
+
                 vim.keymap.set("n", "<leader>dd", dap.continue, { desc = "Start/Continue debugging" })
                 vim.keymap.set("n", "<leader>d<Space>", dap.toggle_breakpoint, { desc = "Toggle debugger breakpoint" })
                 vim.keymap.set("n", "<leader>dj", dap.step_over, { desc = "Step debugger over line." })
