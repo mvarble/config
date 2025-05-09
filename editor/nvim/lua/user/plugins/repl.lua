@@ -3,7 +3,6 @@ return {
     event = "VimEnter",
     config = function()
         local iron = require("iron.core")
-        local view = require("iron.view")
         local common = require("iron.fts.common")
         iron.setup({
             config = {
@@ -25,34 +24,22 @@ return {
                         block_dividers = { "%%" },
                     },
                 },
-                repl_filetype = function(bufnr, ft)
+                repl_filetype = function(_, ft)
                     return ft
                 end,
-                repl_open_cmd = view.split.horizontal.botright("40%"),
+                repl_open_cmd = "belowright 20split",
             },
             keymaps = {
-                toggle_repl = "<leader>gr", -- toggles the repl open and closed.
-                -- If repl_open_command is a table as above, then the following keymaps are
-                -- available
-                -- toggle_repl_with_cmd_1 = "<leader>rv",
-                -- toggle_repl_with_cmd_2 = "<leader>rh",
-                restart_repl = "<leader>rR", -- calls `IronRestart` to restart the repl
-                send_motion = "<leader>st",
-                visual_send = "<leader>sc",
+                toggle_repl = "<leader>rr",
+                restart_repl = "<leader>rq",
+                visual_send = "<leader>sv",
                 send_file = "<leader>sf",
                 send_line = "<leader>sl",
-                send_paragraph = "<leader>sp",
-                send_until_cursor = "<leader>su",
-                send_mark = "<leader>sm",
                 send_code_block = "<leader>sb",
-                send_code_block_and_move = "<leader>sn",
-                mark_motion = "<leader>mc",
-                mark_visual = "<leader>mc",
-                remove_mark = "<leader>md",
                 cr = "<leader>s<cr>",
                 interrupt = "<leader>s<leader>",
                 exit = "<leader>sq",
-                clear = "<leader>cl",
+                clear = "<leader>sc",
             },
             -- If the highlight is on, you can change how it looks
             -- For the available options, check nvim_set_hl
