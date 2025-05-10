@@ -56,7 +56,6 @@ return {
                 "cmake-language-server",
                 "cmakelint",
                 "dockerls",
-                "eslint_d",
                 "gitlab-ci-ls",
                 "jq",
                 "json-lsp",
