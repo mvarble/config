@@ -15,5 +15,5 @@ return {
             })
         end,
     },
-    { "mrcjkb/rustaceanvim", version = "^5" },
+    { "mrcjkb/rustaceanvim", version = "^6", lazy = false },
 }
