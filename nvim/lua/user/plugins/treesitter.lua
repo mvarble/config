@@ -26,7 +26,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     event = { "BufReadPre", "BufNewFile" },
     build = ":TSUpdate",
-    dependencies = { "windwp/nvim-ts-autotag", "RRethy/base16-nvim" },
+    dependencies = { "windwp/nvim-ts-autotag", "tinted-theming/tinted-nvim" },
     config = function()
         local treesitter = require("nvim-treesitter.configs")
         treesitter.setup({
@@ -67,8 +67,9 @@ return {
         })
 
         -- add colors to headers in Markdown
-        local orange = require("base16-colorscheme").colors.base09
-        local yellow = require("base16-colorscheme").colors.base0A
+        local colorscheme = require("tinted-colorscheme").colors
+        local orange = colorscheme.base09
+        local yellow = colorscheme.base0A
         vim.api.nvim_set_hl(0, "@header.h1", { fg = orange, bold = true })
         vim.api.nvim_set_hl(0, "@header.h2", { fg = orange, bold = true })
         vim.api.nvim_set_hl(0, "@header.h3", { fg = orange, bold = true })
