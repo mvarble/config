@@ -1,0 +1,15 @@
+shell = "sh -c '{}'"
+
+[[items]]
+name = "tinted-shell"
+path = "https://github.com/tinted-theming/tinted-shell"
+themes-dir = "scripts"
+hook = ". \"$TINTY_THEME_FILE_PATH\""
+supported-systems = ["base16"]
+
+[[items]]
+name = "tmux"
+path = "~/.tmux/plugins/tinted-tmux"
+themes-dir = "colors"
+hook = "tmux run 2> /dev/null && tmux source-file \"$TINTY_THEME_FILE_PATH\""
+supported-systems = ["base16"]

@@ -86,11 +86,11 @@ return {
     "nvim-lualine/lualine.nvim",
     dependencies = {
         "nvim-tree/nvim-web-devicons",
-        "RRethy/base16-nvim",
+        "tinted-theming/tinted-nvim",
     },
     config = function()
         local lualine = require("lualine")
-        local colorscheme = require("base16-colorscheme").colors
+        local colorscheme = require("tinted-colorscheme").colors
 
         local colors = {
             cyan = colorscheme.base0D,

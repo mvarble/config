@@ -1,13 +1,13 @@
 return {
     "akinsho/bufferline.nvim",
     version = "*",
-    dependencies = { "nvim-tree/nvim-web-devicons", "RRethy/base16-nvim" },
+    dependencies = { "nvim-tree/nvim-web-devicons", "tinted-theming/tinted-nvim" },
     config = function()
         vim.opt.termguicolors = true
         require("bufferline").setup({
             highlights = {
                 fill = {
-                    bg = require("bufferline.colors").shade_color(require("base16-colorscheme").colors.base00, -15),
+                    bg = require("bufferline.colors").shade_color(require("tinted-colorscheme").colors.base00, -15),
                 },
             },
         })

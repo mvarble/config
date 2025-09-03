@@ -7,7 +7,6 @@ return {
         "mfussenegger/nvim-dap-python",
     },
     lazy = false,
-    branch = "regexp",
     keys = {
         { "<leader>vs", "<cmd>VenvSelect<cr>" },
     },
