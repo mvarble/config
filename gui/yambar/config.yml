@@ -1,0 +1,75 @@
+---
+bar:
+  height: 42
+  location: top
+  background: 222222ff
+  foreground: dfdfdfff
+  font: Fira Code Nerd Font:size=12
+  spacing: 8
+  margin: 16
+
+  left:
+    - foreign-toplevel:
+        content:
+          map:
+            conditions:
+              ~activated:
+                empty: {}
+              activated:
+                - string:
+                    text: "{app-id}"
+                    foreground: fba922ff
+                - string:
+                    text: ": {title}"
+
+  right:
+    - network:
+        poll-interval: 5000
+        content:
+          map:
+            default:
+              empty: {}
+            conditions:
+              name == wlan0:
+                map:
+                  default:
+                    string:
+                      text: "<>"
+                      foreground: ffffff66
+                  conditions:
+                    state == down:
+                      string:
+                        text: ""
+                        foreground: ff0000ff
+                    state == up:
+                      string:
+                        text: "{ssid}"
+                        deco:
+                          stack:
+                            - underline:
+                                size: 2
+                                color: f56c0aff
+    - cpu:
+        poll-interval: 2000
+        content:
+          map:
+            conditions:
+              id < 0:
+                - string:
+                    text: "💻 {cpu}%"
+                    deco:
+                      stack:
+                        - underline:
+                            size: 2
+                            color: f90000ff
+    - clock:
+        date-format: "%a %d"
+        time-format: "%H:%M"
+        content:
+          - string:
+              text: "{date} {time}"
+              deco:
+                stack:
+                  - underline:
+                      size: 2
+                      color: 0a6cf5ff
