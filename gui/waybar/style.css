@@ -1,0 +1,14 @@
+@import "colors.css";
+
+/* Your existing Waybar styling with Base16 colors */
+window#waybar {
+    color: @base04;
+    background-color: @base00;
+    border-bottom: 3px solid @base0D;
+    font-family: "Fira Code Nerd";
+}
+
+.module {
+    padding: 0 0.5em;
+    border-bottom: 3px solid @base0A;
+}
