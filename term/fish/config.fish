@@ -19,11 +19,6 @@ fundle plugin danhper/fish-ssh-agent
 fundle plugin edc/bass
 fundle init
 
-# fnm
-if type -q fnm
-    fnm env | source
-end
-
 # pnpm
 set -gx PNPM_HOME "~/.local/share/pnpm"
 if not string match -q -- $PNPM_HOME $PATH
