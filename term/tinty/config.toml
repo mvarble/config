@@ -1,4 +1,4 @@
-shell = "sh -c '{}'"
+shell = "bash -c '{}'"
 
 [[items]]
 name = "tinted-shell"
@@ -18,10 +18,10 @@ supported-systems = ["base16"]
 path = "https://github.com/tinted-theming/base16-rofi"
 name = "tinted-rofi"
 themes-dir = "colors"
-hook = "cp -f %f ~/.config/rofi/base16-theme.rasi"
+hook = "[ -d ~/.config/rofi ] && cp -f %f ~/.config/rofi/base16-theme.rasi"
 
 [[items]]
 path = "https://github.com/tinted-theming/base16-waybar"
 name = "tinted-waybar"
 themes-dir = "colors"
-hook = "cp -f %f ~/.config/waybar/colors.css"
+hook = "[ -d ~/.config/waybar ] && cp -f %f ~/.config/waybar/colors.css"
