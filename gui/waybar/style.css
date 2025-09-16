@@ -4,11 +4,45 @@
 window#waybar {
     color: @base04;
     background-color: @base00;
-    border-bottom: 3px solid @base0D;
     font-family: "Fira Code Nerd";
 }
 
 .module {
     padding: 0 0.5em;
+}
+
+#workspaces button.active {
+    border-bottom: 3px solid @base0D;
+}
+
+.modules-right {
+    padding: 0.25em;
+}
+
+.modules-right :nth-child(7n + 0)>.module {
+    border-bottom: 3px solid @base08;
+}
+
+.modules-right :nth-child(7n + 1)>.module {
+    border-bottom: 3px solid @base09;
+}
+
+.modules-right :nth-child(7n + 2)>.module {
     border-bottom: 3px solid @base0A;
+}
+
+.modules-right :nth-child(7n + 3)>.module {
+    border-bottom: 3px solid @base0B;
+}
+
+.modules-right :nth-child(7n + 4)>.module {
+    border-bottom: 3px solid @base0C;
+}
+
+.modules-right :nth-child(7n + 5)>.module {
+    border-bottom: 3px solid @base0D;
+}
+
+.modules-right :nth-child(7n + 6)>.module {
+    border-bottom: 3px solid @base0E;
 }
