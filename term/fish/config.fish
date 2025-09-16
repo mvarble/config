@@ -29,3 +29,6 @@ end
 if command -v tinty >/dev/null
     tinty init
 end
+
+# bat
+set -x BAT_THEME base16-256
