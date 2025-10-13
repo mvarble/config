@@ -17,7 +17,6 @@ return {
             local mason = require("mason")
             local mason_lspconfig = require("mason-lspconfig")
             local mason_tool_installer = require("mason-tool-installer")
-            local lspconfig = require("lspconfig")
             local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
             -- get lsp capabilities of client
@@ -51,24 +50,23 @@ return {
                     "lua_ls",
                     "pyright",
                     "ruff",
-                    "sqlls",
                     "taplo",
                     "ts_ls",
                     "yamlls",
                 },
                 {
                     function(server_name)
-                        lspconfig[server_name].setup({ capabilities = capabilities, enable = true })
+                        vim.lsp.config(server_name, { capabilities = capabilities, enable = true })
                     end,
                     clangd = function()
-                        lspconfig.clangd.setup({
+                        vim.lsp.config("clangd", {
                             capabilities = capabilities,
                             enable = true,
                             filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "h", "hpp" },
                         })
                     end,
                     lua_ls = function()
-                        lspconfig.lua_ls.setup({
+                        vim.lsp.config("lua_ls", {
                             capabilities = capabilities,
                             on_init = function(client)
                                 client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
@@ -89,7 +87,7 @@ return {
                         })
                     end,
                     ruff = function()
-                        lspconfig.ruff.setup({
+                        vim.lsp.config("ruff", {
                             capabilities = capabilities,
                             on_attach = function(client)
                                 if client.name == "ruff" then
@@ -118,7 +116,6 @@ return {
                     "prettierd",
                     "pyright",
                     "ruff",
-                    "sqlls",
                     "stylua",
                     "svelte-language-server",
                     "tree-sitter-cli",
