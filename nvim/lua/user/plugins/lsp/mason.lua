@@ -19,7 +19,10 @@ return {
     {
         "mason-org/mason-lspconfig.nvim",
         version = "^2.1.0",
-        dependencies = { "mason-org/mason.nvim", "neovim/nvim-lspconfig", "hrsh7th/cmp-nvim-lsp",
+        dependencies = {
+            "mason-org/mason.nvim",
+            "neovim/nvim-lspconfig",
+            "hrsh7th/cmp-nvim-lsp",
             "WhoIsSethDaniel/mason-tool-installer.nvim",
         },
         config = function()
@@ -52,7 +55,7 @@ return {
                     "clang-format",
                     "jq",
                     "prettierd",
-                }
+                },
             })
             local capabilities = vim.tbl_deep_extend(
                 "force",
