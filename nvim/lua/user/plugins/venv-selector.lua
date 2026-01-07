@@ -3,14 +3,11 @@ return {
     dependencies = {
         "neovim/nvim-lspconfig",
         { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
-        "mfussenegger/nvim-dap",
-        "mfussenegger/nvim-dap-python",
     },
+    ft = "python",
     lazy = false,
     keys = {
         { "<leader>vs", "<cmd>VenvSelect<cr>" },
     },
-    config = function()
-        require("venv-selector").setup({})
-    end,
+    opts = {},
 }
