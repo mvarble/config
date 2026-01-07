@@ -156,7 +156,7 @@ return {
             sections = {
                 lualine_x = {
                     attached_clients,
-                    { "filetype" },
+                    { "venv-selector", "filetype" },
                 },
             },
             extensions = { "mason" },

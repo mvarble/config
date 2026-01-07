@@ -9,7 +9,6 @@ return {
             sources = {
                 -- diagnostics
                 null_ls.builtins.diagnostics.buf,
-                null_ls.builtins.diagnostics.cmake_lint,
                 null_ls.builtins.diagnostics.fish,
                 null_ls.builtins.diagnostics.yamllint,
 
