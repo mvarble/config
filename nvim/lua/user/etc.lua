@@ -25,6 +25,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
+-- configure LSP diagnostic sign icons
+vim.diagnostic.config({
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = " ",
+            [vim.diagnostic.severity.WARN] = " ",
+            [vim.diagnostic.severity.HINT] = "󰠠 ",
+            [vim.diagnostic.severity.INFO] = " ",
+        },
+    },
+})
+
 -- Quiet LSP ServerCancelled error
 for _, method in ipairs({ "textDocument/diagnostic", "workspace/diagnostic" }) do
     local default_diagnostic_handler = vim.lsp.handlers[method]

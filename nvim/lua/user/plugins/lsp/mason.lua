@@ -1,38 +1,29 @@
 return {
     {
         "mason-org/mason.nvim",
-        version = "^1.0.0",
+        version = "^2.2.1",
         dependencies = {
             "mfussenegger/nvim-dap",
             "mfussenegger/nvim-dap-python",
-            "WhoIsSethDaniel/mason-tool-installer.nvim",
+        },
+        opts = {
+            ui = {
+                icons = {
+                    package_installed = "✓",
+                    package_pending = "➜",
+                    package_uninstalled = "✗",
+                },
+            },
         },
     },
     {
         "mason-org/mason-lspconfig.nvim",
-        version = "^1.0.0",
-        dependencies = { "mason-org/mason.nvim" },
+        version = "^2.1.0",
+        dependencies = { "mason-org/mason.nvim", "neovim/nvim-lspconfig", "hrsh7th/cmp-nvim-lsp",
+            "WhoIsSethDaniel/mason-tool-installer.nvim",
+        },
         config = function()
-            -- import mason
-            local mason = require("mason")
-
-            -- import mason-lspconfig
-            local mason_lspconfig = require("mason-lspconfig")
-
-            local mason_tool_installer = require("mason-tool-installer")
-
-            -- enable mason and configure icons
-            mason.setup({
-                ui = {
-                    icons = {
-                        package_installed = "✓",
-                        package_pending = "➜",
-                        package_uninstalled = "✗",
-                    },
-                },
-            })
-
-            mason_lspconfig.setup({
+            require("mason-lspconfig").setup({
                 ensure_installed = {
                     "astro",
                     "clangd",
@@ -48,43 +39,56 @@ return {
                     "lua_ls",
                     "pyright",
                     "ruff",
-                    "sqlls",
+                    "sqruff",
+                    "stylua",
+                    "svelte",
                     "taplo",
                     "ts_ls",
                     "yamlls",
                 },
             })
-
-            mason_tool_installer.setup({
+            require("mason-tool-installer").setup({
                 ensure_installed = {
-                    "astro-language-server",
-                    "buf",
                     "clang-format",
-                    "clangd",
-                    "cmake-language-server",
-                    "dockerls",
-                    "gitlab-ci-ls",
                     "jq",
-                    "json-lsp",
-                    "julia-lsp",
-                    "lua-language-server",
                     "prettierd",
-                    "pyright",
-                    "ruff",
-                    "sqlls",
-                    "stylua",
-                    "svelte-language-server",
-                    "tree-sitter-cli",
-                    "typescript-language-server",
-                    "taplo",
-                    "yaml-language-server",
-                    "yamllint",
+                }
+            })
+            local capabilities = vim.tbl_deep_extend(
+                "force",
+                vim.lsp.protocol.make_client_capabilities(),
+                require("cmp_nvim_lsp").default_capabilities()
+            )
+            vim.lsp.config("*", { capabilities = capabilities })
+            vim.lsp.config("ruff", {
+                capabilities = capabilities,
+                on_attach = function(client)
+                    client.server_capabilities.hoverProvider = false
+                end,
+            })
+            vim.lsp.config("clangd", {
+                capabilities = capabilities,
+                filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "h", "hpp" },
+            })
+            vim.lsp.config("lua_ls", {
+                capabilities = capabilities,
+                on_init = function(client)
+                    client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+                        runtime = {
+                            version = "LuaJIT",
+                        },
+                        workspace = {
+                            checkThirdParty = false,
+                            library = {
+                                vim.env.VIMRUNTIME,
+                            },
+                        },
+                    })
+                end,
+                settings = {
+                    Lua = {},
                 },
             })
         end,
-    },
-    {
-        "neovim/nvim-lspconfig",
-        dependencies = { "mason-org/mason.nvim", "mason-org/mason-lspconfig.nvim" },
     },
 }
