@@ -7,7 +7,7 @@ return {
         require("bufferline").setup({
             highlights = {
                 fill = {
-                    bg = require("bufferline.colors").shade_color(require("tinted-colorscheme").colors.base00, -15),
+                    bg = require("bufferline.colors").shade_color(require("tinted-nvim").get_palette().base00, -15),
                 },
             },
         })
