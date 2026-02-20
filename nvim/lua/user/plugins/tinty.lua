@@ -3,6 +3,8 @@ return {
     priority = 1000,
     config = function()
         vim.opt.termguicolors = true
-        require("tinted-colorscheme").setup()
+        require("tinted-nvim").setup({
+            selector = { enabled = true, cmd = "tinty current" },
+        })
     end,
 }

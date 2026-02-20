@@ -90,7 +90,7 @@ return {
     },
     config = function()
         local lualine = require("lualine")
-        local colorscheme = require("tinted-colorscheme").colors
+        local colorscheme = require("tinted-nvim").get_palette()
 
         local colors = {
             cyan = colorscheme.base0D,
