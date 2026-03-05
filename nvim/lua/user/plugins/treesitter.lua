@@ -67,7 +67,7 @@ return {
         })
 
         -- add colors to headers in Markdown
-        local colorscheme = require("tinted-colorscheme").colors
+        local colorscheme = require("tinted-nvim").get_palette()
         local orange = colorscheme.base09
         local yellow = colorscheme.base0A
         vim.api.nvim_set_hl(0, "@header.h1", { fg = orange, bold = true })
