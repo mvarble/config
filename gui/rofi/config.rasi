@@ -1,5 +1,5 @@
 configuration {
-	modes: "drun,filebrowser";
+    modes: "drun,filebrowser";
 /*	font: "mono 12";*/
 /*	location: 0;*/
 /*	yoffset: 0;*/
