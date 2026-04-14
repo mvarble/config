@@ -24,35 +24,19 @@ local languages = {
 
 return {
     "nvim-treesitter/nvim-treesitter",
-    event = { "BufReadPre", "BufNewFile" },
+    lazy = false,
     build = ":TSUpdate",
     dependencies = { "windwp/nvim-ts-autotag", "tinted-theming/tinted-nvim" },
     config = function()
-        local treesitter = require("nvim-treesitter.configs")
-        treesitter.setup({
-            highlight = {
-                enable = true,
-                disable = function(_, bufnr)
-                    local buf_name = vim.api.nvim_buf_get_name(bufnr)
-                    local file_size = vim.api.nvim_call_function("getfsize", { buf_name })
-                    return file_size > 256 * 1024
-                end,
-            },
-            indent = { enable = true, additional_vim_regex_highlighting = false },
-            autotag = {
-                enable = true,
-            },
-            ensure_installed = languages,
-            incremental_selection = {
-                enable = true,
-                keymaps = {
-                    init_selection = "<C-space>",
-                    node_incremental = "<C-space>",
-                    scope_incremental = false,
-                    node_decremental = "<bs>",
-                },
-            },
-        })
+        require("nvim-treesitter").install(languages)
+
+        vim.treesitter.language.register("rust", "rs")
+        vim.treesitter.language.register("javascript", { "js", "mjs", "cjs" })
+        vim.treesitter.language.register("typescript", { "ts", "mts", "cts" })
+        vim.treesitter.language.register("python", "py")
+        vim.treesitter.language.register("yaml", "yml")
+        vim.treesitter.language.register("bash", "sh")
+        vim.treesitter.language.register("markdown", "md")
 
         -- Treat $$ as latex in Markdown
         vim.api.nvim_set_hl(0, "@latex", { link = "Special" })
