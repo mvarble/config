@@ -4,9 +4,7 @@ return {
     config = function()
         vim.opt.termguicolors = true
         require("tinted-nvim").setup({
-            selector = {
-                enabled = true,
-            },
+            selector = { enabled = true, cmd = "tinty current" },
         })
     end,
 }
