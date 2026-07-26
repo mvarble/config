@@ -1,0 +1,13 @@
+[SddmGreeterTheme]
+Name=Rat Swarm
+Description=A swarm of low-poly rats that wiggle their way to your cursor
+Author=mvarble
+License=GPL-2.0-or-later
+Type=sddm-theme
+Version=0.1
+MainScript=Main.qml
+ConfigFile=theme.conf
+TranslationsDirectory=
+QtVersion=6
+Theme-Id=rat-swarm
+Theme-API=2.0
