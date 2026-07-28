@@ -114,7 +114,7 @@ hl.config({
 })
 
 -- Frosted-glass blur behind quickshell layer surfaces.
-for _, ns in ipairs({ "quickshell-settings", "quickshell-launcher", "quickshell-calendar" }) do
+for _, ns in ipairs({ "quickshell-settings", "quickshell-launcher", "quickshell-calendar", "quickshell-workspacebar" }) do
     hl.layer_rule({
         name = "blur-" .. ns,
         match = { namespace = ns },

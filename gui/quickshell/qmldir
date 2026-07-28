@@ -3,3 +3,4 @@ SettingsPanel 1.0 SettingsPanel.qml
 LauncherModal 1.0 LauncherModal.qml
 CalendarPanel 1.0 CalendarPanel.qml
 Wallpaper 1.0 Wallpaper.qml
+WorkspaceBar 1.0 WorkspaceBar.qml

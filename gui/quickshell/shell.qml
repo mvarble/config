@@ -22,6 +22,10 @@ ShellRoot {
         id: calendarPanel
     }
 
+    WorkspaceBar {
+        id: workspaceBar
+    }
+
     // The three surfaces are independent: each toggles on its own and can be
     // open at the same time as the others.
     IpcHandler {
@@ -43,5 +47,12 @@ ShellRoot {
         function open(): void { calendarPanel.open = true; }
         function close(): void { calendarPanel.open = false; }
         function toggle(): void { calendarPanel.open ? close() : open(); }
+    }
+
+    IpcHandler {
+        target: "workspacebar"
+        function open(): void { workspaceBar.open = true; }
+        function close(): void { workspaceBar.open = false; }
+        function toggle(): void { workspaceBar.open ? close() : open(); }
     }
 }
