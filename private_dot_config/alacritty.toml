@@ -1,6 +1,10 @@
 [colors]
 draw_bold_text_with_bright_colors = false
 
+[colors.primary]
+background = "#eff1f5"
+foreground = "#4c4f69"
+
 [cursor.style]
 blinking = "Off"
 shape = "Block"
@@ -29,14 +33,15 @@ program = "tmux"
 
 [window]
 opacity = 1.0
+dynamic_padding = true
 
 [window.dimensions]
 columns = 120
 lines = 40
 
 [window.padding]
-x = 1
-y = 1
+x = 0
+y = 0
 
 [window.position]
 x = 100

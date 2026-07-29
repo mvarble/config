@@ -17,20 +17,15 @@ alias vi=nvim
 # plugins
 fundle plugin danhper/fish-ssh-agent
 fundle plugin edc/bass
+fundle plugin catppuccin/fish
 fundle init
+
+# theme
+fish_config theme choose catppuccin-mocha
+set -g fish_color_valid_path $fish_color_valid_path --underline
 
 # pnpm
 set -gx PNPM_HOME "$HOME/.local/share/pnpm"
 if not string match -q -- $PNPM_HOME $PATH
     set -gx PATH "$PNPM_HOME" $PATH
 end
-
-# tinty
-if command -v tinty >/dev/null
-    tinty init
-end
-
-# bat
-set -x BAT_THEME base16-256
-
-# hi

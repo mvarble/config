@@ -7,7 +7,7 @@ hl.config({
         kb_rules = "",
         follow_mouse = 1,
         sensitivity = 0,
-        repeat_rate = 100,
+        repeat_rate = 50,
         repeat_delay = 350,
         touchpad = {
             clickfinger_behavior = true,
