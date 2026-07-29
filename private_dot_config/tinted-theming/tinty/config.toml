@@ -1,0 +1,27 @@
+shell = "bash -c '{}'"
+
+[[items]]
+name = "tinted-shell"
+path = "https://github.com/tinted-theming/tinted-shell"
+themes-dir = "scripts"
+hook = ". \"$TINTY_THEME_FILE_PATH\""
+supported-systems = ["base16"]
+
+[[items]]
+name = "tmux"
+path = "~/.tmux/plugins/tinted-tmux"
+themes-dir = "colors"
+hook = "tmux run 2> /dev/null && tmux source-file \"$TINTY_THEME_FILE_PATH\""
+supported-systems = ["base16"]
+
+[[items]]
+path = "https://github.com/tinted-theming/base16-rofi"
+name = "tinted-rofi"
+themes-dir = "colors"
+hook = "[ -d ~/.config/rofi ] && cp -f %f ~/.config/rofi/base16-theme.rasi"
+
+[[items]]
+path = "https://github.com/tinted-theming/base16-waybar"
+name = "tinted-waybar"
+themes-dir = "colors"
+hook = "[ -d ~/.config/waybar ] && cp -f %f ~/.config/waybar/colors.css"

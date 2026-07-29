@@ -1,0 +1,4 @@
+["./.tmux/plugins/tpm"]
+type = "git-repo"
+url = "https://github.com/tmuxpack/tpack"
+refreshPeriod = "168h"
