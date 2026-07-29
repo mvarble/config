@@ -10,7 +10,7 @@ Singleton {
     readonly property color surfaceAlt: "#bcc0cc"
     readonly property color text: "#4c4f69"
     readonly property color subtext: "#5c5f77"
-    readonly property color accent: "#7287fd"
+    readonly property color accent: "#8839ef"
     readonly property color border: "#bcc0cc"
 
     // Launcher backdrop dim, fixed at 0 (fully transparent backdrop).
