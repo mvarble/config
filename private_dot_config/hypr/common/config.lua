@@ -1,4 +1,4 @@
 return {
     mainMod = "SUPER",
-    workspaces = 5,
+    workspaces = 4,
 }
