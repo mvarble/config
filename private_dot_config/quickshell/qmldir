@@ -1,0 +1,6 @@
+singleton Theme 1.0 Theme.qml
+SettingsPanel 1.0 SettingsPanel.qml
+LauncherModal 1.0 LauncherModal.qml
+CalendarPanel 1.0 CalendarPanel.qml
+Wallpaper 1.0 Wallpaper.qml
+LeftBar 1.0 LeftBar.qml
