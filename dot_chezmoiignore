@@ -1,0 +1,4 @@
+~/.config/fish/fundle/*
+~/.config/nvim/lazy-lock.json
+~/.tmux/plugins/*
+!~/.tmux/plugins/tpm
