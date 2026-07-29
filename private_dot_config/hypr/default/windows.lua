@@ -1,4 +1,4 @@
-local config = require("../common/config.lua")
+local config = require("./common/config.lua")
 local workspaces = config.workspaces
 
 for i = 1, workspaces do
