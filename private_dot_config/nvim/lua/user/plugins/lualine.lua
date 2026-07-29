@@ -86,24 +86,23 @@ return {
     "nvim-lualine/lualine.nvim",
     dependencies = {
         "nvim-tree/nvim-web-devicons",
-        "tinted-theming/tinted-nvim",
     },
     config = function()
         local lualine = require("lualine")
-        local colorscheme = require("tinted-nvim").get_palette()
-
-        local colors = {
-            cyan = colorscheme.base0D,
-            green = colorscheme.base0B,
-            violet = colorscheme.base0E,
-            red = colorscheme.base08,
-            yellow = colorscheme.base0A,
-            orange = colorscheme.base09,
-            fg = colorscheme.base01,
-            bg = colorscheme.base06,
-            inactive_fg = colorscheme.base04,
-            inactive_bg = colorscheme.base01,
-        }
+        local C = require("catppuccin.palettes").get_palette("latte")
+        --
+        -- local colors = {
+        --     cyan = colorscheme.base0D,
+        --     green = colorscheme.base0B,
+        --     violet = colorscheme.base0E,
+        --     red = colorscheme.base08,
+        --     yellow = colorscheme.base0A,
+        --     orange = colorscheme.base09,
+        --     fg = colorscheme.base01,
+        --     bg = colorscheme.base06,
+        --     inactive_fg = colorscheme.base04,
+        --     inactive_bg = colorscheme.base01,
+        -- }
 
         local attached_clients = {
             get_attached_clients,
@@ -117,39 +116,37 @@ return {
             options = {
                 theme = {
                     normal = {
-                        a = { bg = colors.cyan, fg = colors.bg, gui = "bold" },
-                        b = { bg = colors.bg, fg = colors.fg },
-                        c = { bg = colors.bg, fg = colors.fg },
+                        a = { bg = C.blue, fg = C.mantle, gui = "bold" },
+                        b = { bg = C.surface0, fg = C.blue },
+                        c = { bg = C.mantle, fg = C.text },
                     },
-                    terminal = {
-                        a = { bg = colors.red, fg = colors.bg, gui = "bold" },
-                        b = { bg = colors.bg, fg = colors.fg },
-                        c = { bg = colors.bg, fg = colors.fg },
-                    },
+
                     insert = {
-                        a = { bg = colors.green, fg = colors.bg, gui = "bold" },
-                        b = { bg = colors.bg, fg = colors.fg },
-                        c = { bg = colors.bg, fg = colors.fg },
+                        a = { bg = C.green, fg = C.base, gui = "bold" },
+                        b = { bg = C.surface0, fg = C.green },
+                    },
+
+                    terminal = {
+                        a = { bg = C.green, fg = C.base, gui = "bold" },
+                        b = { bg = C.surface0, fg = C.green },
+                    },
+
+                    command = {
+                        a = { bg = C.peach, fg = C.base, gui = "bold" },
+                        b = { bg = C.surface0, fg = C.peach },
                     },
                     visual = {
-                        a = { bg = colors.violet, fg = colors.bg, gui = "bold" },
-                        b = { bg = colors.bg, fg = colors.fg },
-                        c = { bg = colors.bg, fg = colors.fg },
-                    },
-                    command = {
-                        a = { bg = colors.yellow, fg = colors.bg, gui = "bold" },
-                        b = { bg = colors.bg, fg = colors.fg },
-                        c = { bg = colors.bg, fg = colors.fg },
+                        a = { bg = C.mauve, fg = C.base, gui = "bold" },
+                        b = { bg = C.surface0, fg = C.mauve },
                     },
                     replace = {
-                        a = { bg = colors.orange, fg = colors.bg, gui = "bold" },
-                        b = { bg = colors.bg, fg = colors.fg },
-                        c = { bg = colors.bg, fg = colors.fg },
+                        a = { bg = C.red, fg = C.base, gui = "bold" },
+                        b = { bg = C.surface0, fg = C.red },
                     },
                     inactive = {
-                        a = { bg = colors.inactive_bg, fg = colors.inactive_fg, gui = "bold" },
-                        b = { bg = colors.inactive_bg, fg = colors.inactive_fg },
-                        c = { bg = colors.inactive_bg, fg = colors.inactive_fg },
+                        a = { bg = C.mantle, fg = C.blue },
+                        b = { bg = C.mantle, fg = C.surface1, gui = "bold" },
+                        c = { bg = C.mantle, fg = C.overlay0 },
                     },
                 },
             },

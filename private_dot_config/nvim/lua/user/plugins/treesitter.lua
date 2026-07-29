@@ -26,7 +26,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     lazy = false,
     build = ":TSUpdate",
-    dependencies = { "windwp/nvim-ts-autotag", "tinted-theming/tinted-nvim" },
+    dependencies = { "windwp/nvim-ts-autotag", "catppuccin/nvim" },
     config = function()
         require("nvim-treesitter").install(languages)
 
@@ -51,9 +51,9 @@ return {
         })
 
         -- add colors to headers in Markdown
-        local colorscheme = require("tinted-nvim").get_palette()
-        local orange = colorscheme.base09
-        local yellow = colorscheme.base0A
+        local colorscheme = require("catppuccin.palettes").get_palette("latte")
+        local orange = colorscheme.peach
+        local yellow = colorscheme.yellow
         vim.api.nvim_set_hl(0, "@header.h1", { fg = orange, bold = true })
         vim.api.nvim_set_hl(0, "@header.h2", { fg = orange, bold = true })
         vim.api.nvim_set_hl(0, "@header.h3", { fg = orange, bold = true })

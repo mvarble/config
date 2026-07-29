@@ -1,6 +1,7 @@
 return {
     "goolord/alpha-nvim",
     event = "VimEnter",
+    dependencies = { "catppuccin/nvim" },
     config = function()
         local alpha = require("alpha")
         local dashboard = require("alpha.themes.dashboard")
@@ -49,6 +50,7 @@ return {
             [[                        | |     ' `-'  |' `-' ;; '._,' '                       ]],
             [[                       (___)    `.__.'_. `.__.  '.___.'                        ]],
         }
+        dashboard.section.header.opts.hl = "Function"
 
         -- Set menu
         dashboard.section.buttons.val = {
