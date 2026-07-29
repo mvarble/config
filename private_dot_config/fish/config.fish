@@ -32,3 +32,5 @@ end
 
 # bat
 set -x BAT_THEME base16-256
+
+# hi

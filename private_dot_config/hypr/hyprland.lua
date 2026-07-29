@@ -34,7 +34,6 @@ hl.monitor({
 -- Set programs that you use
 local terminal = "alacritty"
 local fileManager = "thunar"
-local fileBrowser = "fofi -show filebrowser"
 local menu = "rofi -show drun"
 local browser = "firefox-developer-edition"
 
@@ -51,7 +50,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("hyprsunset")
     hl.exec_cmd("pkill -x dolphin || true")
     hl.exec_cmd("thunar --daemon")
-    hl.exec_cmd("hyprctl dispatch workspace 1")
+    hl.dsp.focus({ workspace = 1 })
 end)
 
 -------------------------------
@@ -254,7 +253,7 @@ hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd("xournalpp"))
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
-hl.bind(mainMod .. " + F", hl.dsp.exec_cmd(fileBrowser))
+hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
@@ -331,9 +330,9 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true 
 -- See https://wiki.hypr.land/Configuring/Basics/Window-Rules/
 -- and https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
 for i = 1, 9 do
-    hl.workspace_rule({ workspace = tostring(i), persistent = i < 3, monitor = "1" })
+    hl.workspace_rule({ workspace = tostring(i), persistent = i < 3, monitor = "DP-1", default = i == 1 })
 end
-hl.workspace_rule({ workspace = "10", persistent = true, monitor = "0" })
+hl.workspace_rule({ workspace = "10", persistent = true, monitor = "HDMI-A-1" })
 hl.window_rule({
     match = { workspace = "name:~" },
     float = true,
@@ -343,7 +342,7 @@ hl.window_rule({
     },
     size = { "800", "600" },
 })
-hl.workspace_rule({ workspace = "name:~", persistent = true, monitor = "1" })
+hl.workspace_rule({ workspace = "name:~", persistent = true, monitor = "DP-1" })
 
 -- Example window rules that are useful
 hl.window_rule({
@@ -367,6 +366,12 @@ hl.window_rule({
     },
 
     no_focus = true,
+})
+
+hl.config({
+    cursor = {
+        default_monitor = "DP-1",
+    },
 })
 
 -- Hyprland-run windowrule

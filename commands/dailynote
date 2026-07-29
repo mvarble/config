@@ -1,2 +1,0 @@
-#!/bin/bash
-nvim /home/mvarble/docs/daily/$(date +"%Y-%m-%d").md
