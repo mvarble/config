@@ -21,7 +21,7 @@ fundle plugin catppuccin/fish
 fundle init
 
 # theme
-fish_config theme choose catppuccin-mocha
+fish_config theme choose catppuccin-mocha --color-theme light
 set -g fish_color_valid_path $fish_color_valid_path --underline
 
 # pnpm
