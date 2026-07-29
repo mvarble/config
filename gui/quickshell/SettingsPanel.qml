@@ -31,11 +31,17 @@ PanelWindow {
         }
     }
 
-    // Longest section exit delay (200) + exit animation duration (350).
+    // Longest section exit delay (300) + exit animation duration (350).
     Timer {
         id: closeTimer
-        interval: 550
+        interval: 650
         onTriggered: root.shown = false
+    }
+
+    // Minute-precision clock for the big HH:MM readout at the top.
+    SystemClock {
+        id: clock
+        precision: SystemClock.Minutes
     }
     anchors {
         left: true
@@ -107,11 +113,31 @@ PanelWindow {
                     spacing: 14
 
                     // ------------------------------------------------------
+                    // Big block-number clock, 24-hour HH:MM. Monospace bold
+                    // digits keep a fixed width as the numbers change.
+                    Section {
+                        Layout.fillWidth: true
+                        enter: root.sectionsEnter
+                        enterDelay: 0
+                        exitDelay: 300
+
+                        Text {
+                            Layout.fillWidth: true
+                            horizontalAlignment: Text.AlignHCenter
+                            text: Qt.formatTime(clock.date, "HH:mm")
+                            color: Theme.text
+                            font.family: Theme.glyphFont
+                            font.pixelSize: 64
+                            font.bold: true
+                        }
+                    }
+
+                    // ------------------------------------------------------
                     Section {
                         Layout.fillWidth: true
                         title: "Sound & Display"
                         enter: root.sectionsEnter
-                        enterDelay: 0
+                        enterDelay: 100
                         exitDelay: 200
 
                         ValueSlider {
@@ -151,7 +177,7 @@ PanelWindow {
                         Layout.fillWidth: true
                         title: "Network"
                         enter: root.sectionsEnter
-                        enterDelay: 100
+                        enterDelay: 200
                         exitDelay: 100
 
                         NetIface {
@@ -183,7 +209,7 @@ PanelWindow {
                         Layout.fillWidth: true
                         title: "Resources"
                         enter: root.sectionsEnter
-                        enterDelay: 200
+                        enterDelay: 300
                         exitDelay: 0
 
                         // Power profile segmented control.
