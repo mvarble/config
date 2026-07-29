@@ -2,3 +2,5 @@
 ~/.config/nvim/lazy-lock.json
 ~/.tmux/plugins/*
 !~/.tmux/plugins/tpm
+~/.config/hypr/ratcage.hyprland.lua
+~/.config/hypr/default.hyprland.lua

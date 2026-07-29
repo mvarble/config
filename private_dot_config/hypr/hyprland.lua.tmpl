@@ -1,0 +1,5 @@
+{{ if eq .chezmoi.hostname "ratcage" -}}
+{{ include "private_dot_config/hypr/ratcage.hyprland.lua" }}
+{{ else -}}
+{{ include "private_dot_config/hypr/default.hyprland.lua" }}
+{{ end -}}

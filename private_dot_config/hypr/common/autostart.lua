@@ -1,0 +1,5 @@
+hl.on("hyprland.start", function()
+    hl.exec_cmd("pkill -x dolphin || true")
+    hl.exec_cmd("thunar --daemon")
+    hl.dsp.focus({ workspace = 1 })
+end)
