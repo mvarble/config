@@ -19,4 +19,4 @@ hl.config({
     },
 })
 
-return { main, alt }
+return { main = main, alt = alt }
