@@ -56,10 +56,11 @@ PanelWindow {
 
     // Existing workspaces with positive ids (excludes special/scratchpad
     // workspaces), sorted numerically.
+    // Workspace 10 is persistent and pinned to the alt monitor; hide it.
     readonly property var workspaceList: {
         const list = [];
         for (const ws of Hyprland.workspaces.values)
-            if (ws.id > 0)
+            if (ws.id > 0 && ws.id !== 10)
                 list.push(ws);
         return list.sort((a, b) => a.id - b.id);
     }
