@@ -15,6 +15,9 @@ ColumnLayout {
     property string icon: ""
     property string caption: ""
     property real sourceValue: 0
+    // Overrides the trailing percentage label when non-empty (e.g. Kelvin
+    // for a color temperature slider).
+    property string valueText: ""
     // How long the handle keeps its dragged position after release while
     // waiting for the underlying service to report the new value back.
     property int settleDelay: 400
@@ -139,9 +142,9 @@ ColumnLayout {
         }
 
         Text {
-            Layout.preferredWidth: 40
+            Layout.preferredWidth: root.valueText !== "" ? 52 : 40
             horizontalAlignment: Text.AlignRight
-            text: Math.round(root.position * 100) + "%"
+            text: root.valueText !== "" ? root.valueText : Math.round(root.position * 100) + "%"
             color: Theme.subtext
             font.pixelSize: Theme.fontSize - 2
         }

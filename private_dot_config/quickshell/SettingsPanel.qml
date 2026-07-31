@@ -198,11 +198,11 @@ PanelWindow {
                     }
 
                     // ------------------------------------------------------
-                    // Backlight control gets its own card, which only exists
-                    // on machines with a controllable backlight (e.g. laptops).
+                    // Display controls. The card always exists; only the
+                    // backlight slider is conditional on the machine having
+                    // a controllable backlight (e.g. laptops).
                     Section {
                         Layout.fillWidth: true
-                        visible: SystemMonitor.brightnessAvailable
                         title: "Display"
                         enter: root.sectionsEnter
                         enterDelay: 150
@@ -210,6 +210,7 @@ PanelWindow {
 
                         ValueSlider {
                             Layout.fillWidth: true
+                            visible: SystemMonitor.brightnessAvailable
                             caption: "Screen brightness"
                             icon: "󰃠"
                             sourceValue: SystemMonitor.brightness
@@ -220,6 +221,35 @@ PanelWindow {
                                 brightApply.pending = value;
                                 brightApply.restart();
                             }
+                        }
+
+                        ToggleRow {
+                            Layout.fillWidth: true
+                            icon: "󰖔"
+                            label: "hyprsunset"
+                            checked: Hyprsunset.active
+                            onToggled: Hyprsunset.toggle()
+                        }
+
+                        // Dimmed while hyprsunset is off; the values still
+                        // apply the next time it is toggled on.
+                        ValueSlider {
+                            Layout.fillWidth: true
+                            opacity: Hyprsunset.active ? 1 : Theme.mutedOpacity
+                            caption: "Gamma"
+                            icon: "󰃮"
+                            sourceValue: Hyprsunset.gamma / 100
+                            onApplied: value => Hyprsunset.setGamma(value * 100)
+                        }
+
+                        ValueSlider {
+                            Layout.fillWidth: true
+                            opacity: Hyprsunset.active ? 1 : Theme.mutedOpacity
+                            caption: "Color temperature"
+                            icon: "󰔏"
+                            sourceValue: (Hyprsunset.temperature - 2500) / 4000
+                            valueText: Math.round(Hyprsunset.temperature) + " K"
+                            onApplied: value => Hyprsunset.setTemperature(2500 + value * 4000)
                         }
                     }
 
