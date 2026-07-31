@@ -1,4 +1,5 @@
 singleton SystemMonitor 1.0 SystemMonitor.qml
 singleton NetworkInfo 1.0 NetworkInfo.qml
+singleton Hyprsunset 1.0 Hyprsunset.qml
 singleton LaunchHistory 1.0 LaunchHistory.qml
 singleton Calendar 1.0 Calendar.qml
