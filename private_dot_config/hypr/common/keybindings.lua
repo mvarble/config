@@ -18,8 +18,9 @@ hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(programs.launcher))
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(programs.settings))
 hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(programs.calendar))
 
--- Toggle floating
+-- Toggle floating/full
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle" }))
 
 -- Move focus with ALT + vi keys
 hl.bind("ALT + h", hl.dsp.focus({ direction = "left" }))
