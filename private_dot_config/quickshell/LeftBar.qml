@@ -5,9 +5,9 @@ import Quickshell.Hyprland
 import Quickshell.Wayland
 
 // Thin persistent bar on the left screen edge showing the Hyprland
-// workspaces (click to switch) above a ticking clock. Always visible and
-// reserves screen space via the layer-shell exclusive zone, so tiled
-// windows sit to its right.
+// workspaces (click to switch) above a ticking clock. Reserves screen space
+// via the layer-shell exclusive zone, so tiled windows sit to its right.
+// Hides itself while a window is fullscreened on this bar's monitor.
 PanelWindow {
     id: root
 
@@ -19,6 +19,13 @@ PanelWindow {
     implicitWidth: Theme.barWidth
     color: Theme.cardBackground
     exclusionMode: ExclusionMode.Auto
+
+    // True while the workspace shown on this bar's monitor has a fullscreen
+    // client. Hiding the window destroys the layer surface, releasing the
+    // exclusive zone until fullscreen is exited.
+    readonly property bool fullscreenActive:
+        Hyprland.monitorFor(root.screen)?.activeWorkspace?.hasFullscreen ?? false
+    visible: !fullscreenActive
 
     WlrLayershell.namespace: "quickshell-leftbar"
     // Above the other shell surfaces (settings panel is Top layer) so their
