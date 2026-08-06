@@ -54,7 +54,7 @@ vim.opt.shiftround = true
 vim.opt.expandtab = true
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "*",
-    callback = function()
+    callback = function(args)
         local filetype = vim.bo.filetype
         for _, ft in ipairs({ "yaml", "markdown", "toml", "json", "proto", "cmake" }) do
             if filetype == ft then
@@ -65,6 +65,10 @@ vim.api.nvim_create_autocmd("FileType", {
         end
         vim.o.tabstop = 4
         vim.o.shiftwidth = 4
+        local lang = vim.treesitter.language.get_lang(filetype)
+        if lang and pcall(vim.treesitter.language.add, lang) then
+            vim.treesitter.start(args.buf, lang)
+        end
     end,
 })
 
