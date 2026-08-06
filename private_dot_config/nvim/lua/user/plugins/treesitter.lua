@@ -26,6 +26,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     lazy = false,
     build = ":TSUpdate",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = { "windwp/nvim-ts-autotag", "catppuccin/nvim" },
     config = function()
         require("nvim-treesitter").install(languages)
