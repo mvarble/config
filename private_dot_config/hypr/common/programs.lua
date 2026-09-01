@@ -5,4 +5,5 @@ return {
     launcher = "qs ipc call launcher toggle",
     settings = "qs ipc call settings toggle",
     calendar = "qs ipc call calendar toggle",
+    notifications = "qs ipc call notifications toggle",
 }

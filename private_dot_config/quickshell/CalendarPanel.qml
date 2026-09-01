@@ -264,15 +264,29 @@ PanelWindow {
                     Repeater {
                         model: 7
 
-                        delegate: Text {
+                        // The label sits inside a zero-implicit-width Item
+                        // rather than being the cell itself. A bare Text would
+                        // hand GridLayout its own text width as the column's
+                        // preferred width, so "Wed" and "Fri" would get
+                        // different columns; the day cells below are
+                        // Rectangles with no implicit width and so divide the
+                        // row evenly. Matching that here is what keeps each
+                        // weekday sitting over its dates.
+                        delegate: Item {
                             required property int index
                             readonly property int qtDow: (root.firstDow + index) % 7 || 7
 
                             Layout.fillWidth: true
-                            horizontalAlignment: Text.AlignHCenter
-                            text: Qt.locale().dayName(qtDow, Locale.ShortFormat)
-                            color: Theme.subtext
-                            font.pixelSize: Theme.fontSize - 3
+                            Layout.preferredWidth: 0
+                            implicitHeight: dowLabel.implicitHeight
+
+                            Text {
+                                id: dowLabel
+                                anchors.horizontalCenter: parent.horizontalCenter
+                                text: Qt.locale().dayName(parent.qtDow, Locale.ShortFormat)
+                                color: Theme.subtext
+                                font.pixelSize: Theme.fontSize - 3
+                            }
                         }
                     }
                 }
