@@ -61,7 +61,7 @@ hl.config({
     },
 })
 
-for _, ns in ipairs({ "quickshell-settings", "quickshell-launcher", "quickshell-calendar", "quickshell-workspacebar" }) do
+for _, ns in ipairs({ "quickshell-settings", "quickshell-launcher", "quickshell-calendar", "quickshell-workspacebar", "quickshell-notifications", "quickshell-toasts" }) do
     hl.layer_rule({
         name = "blur-" .. ns,
         match = { namespace = ns },

@@ -17,6 +17,7 @@ hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(programs.fileManager))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(programs.launcher))
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(programs.settings))
 hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(programs.calendar))
+hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(programs.notifications))
 
 -- Toggle floating/full
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))

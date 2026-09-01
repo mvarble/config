@@ -26,7 +26,16 @@ ShellRoot {
         id: leftBar
     }
 
-    // The three surfaces are independent: each toggles on its own and can be
+    NotificationSidebar {
+        id: notificationSidebar
+    }
+
+    NotificationToasts {
+        id: notificationToasts
+        suppressed: notificationSidebar.open
+    }
+
+    // The surfaces are independent: each toggles on its own and can be
     // open at the same time as the others.
     IpcHandler {
         target: "settings"
@@ -47,5 +56,12 @@ ShellRoot {
         function open(): void { calendarPanel.open = true; }
         function close(): void { calendarPanel.open = false; }
         function toggle(): void { calendarPanel.open ? close() : open(); }
+    }
+
+    IpcHandler {
+        target: "notifications"
+        function open(): void { notificationSidebar.open = true; }
+        function close(): void { notificationSidebar.open = false; }
+        function toggle(): void { notificationSidebar.open ? close() : open(); }
     }
 }
