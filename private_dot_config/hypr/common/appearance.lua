@@ -1,32 +1,32 @@
 hl.config({
-    general = {
-        gaps_in = 10,
-        gaps_out = 10,
-        border_size = 5,
-        col = {
-            active_border = { colors = { "rgba(33ccffee)", "rgba(00ff99ee)" }, angle = 45 },
-            inactive_border = "rgba(595959aa)",
-        },
-        resize_on_border = false,
-        allow_tearing = false,
-        layout = "scrolling",
-    },
+	general = {
+		gaps_in = 5,
+		gaps_out = 10,
+		border_size = 5,
+		col = {
+			active_border = { colors = { "rgba(7287fdee)", "rgba(04a5e5ee)" }, angle = 45 },
+			inactive_border = "rgba(595959aa)",
+		},
+		resize_on_border = false,
+		allow_tearing = false,
+		layout = "scrolling",
+	},
 
-    decoration = {
-        rounding = false,
-        active_opacity = 1.0,
-        inactive_opacity = 1.0,
-        shadow = {
-            enabled = true,
-        },
-        blur = {
-            enabled = true,
-        },
-    },
+	decoration = {
+		rounding = false,
+		active_opacity = 1.0,
+		inactive_opacity = 1.0,
+		shadow = {
+			enabled = true,
+		},
+		blur = {
+			enabled = true,
+		},
+	},
 
-    animations = {
-        enabled = true,
-    },
+	animations = {
+		enabled = true,
+	},
 })
 
 hl.curve("easeOutQuint", { type = "bezier", points = { { 0.23, 1 }, { 0.32, 1 } } })
@@ -56,16 +56,23 @@ hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "a
 hl.animation({ leaf = "zoomFactor", enabled = true, speed = 7, bezier = "quick" })
 
 hl.config({
-    scrolling = {
-        fullscreen_on_one_column = true,
-    },
+	scrolling = {
+		fullscreen_on_one_column = true,
+	},
 })
 
-for _, ns in ipairs({ "quickshell-settings", "quickshell-launcher", "quickshell-calendar", "quickshell-workspacebar", "quickshell-notifications", "quickshell-toasts" }) do
-    hl.layer_rule({
-        name = "blur-" .. ns,
-        match = { namespace = ns },
-        blur = true,
-        ignore_alpha = 0,
-    })
+for _, ns in ipairs({
+	"quickshell-settings",
+	"quickshell-launcher",
+	"quickshell-calendar",
+	"quickshell-workspacebar",
+	"quickshell-notifications",
+	"quickshell-toasts",
+}) do
+	hl.layer_rule({
+		name = "blur-" .. ns,
+		match = { namespace = ns },
+		blur = true,
+		ignore_alpha = 0,
+	})
 end
