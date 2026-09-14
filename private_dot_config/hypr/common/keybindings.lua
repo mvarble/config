@@ -8,7 +8,7 @@ hl.bind(
     mainMod .. " + M",
     hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'")
 )
-hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
+hl.bind(mainMod .. " + L", hl.dsp.exec_cmd(programs.lock))
 
 -- Program shortcuts
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(programs.terminal))
