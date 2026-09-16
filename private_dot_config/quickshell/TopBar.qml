@@ -4,19 +4,20 @@ import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Wayland
 
-// Thin persistent bar on the left screen edge showing the Hyprland
-// workspaces (click to switch) above a ticking clock. Reserves screen space
-// via the layer-shell exclusive zone, so tiled windows sit to its right.
-// Hides itself while a window is fullscreened on this bar's monitor.
+// Thin persistent bar along the top screen edge showing the Hyprland
+// workspaces (click to switch) on the left and a ticking clock on the right.
+// Reserves screen space via the layer-shell exclusive zone, so tiled windows
+// sit below it. Hides itself while a window is fullscreened on this bar's
+// monitor.
 PanelWindow {
     id: root
 
     anchors {
         left: true
         top: true
-        bottom: true
+        right: true
     }
-    implicitWidth: Theme.barWidth
+    implicitHeight: Theme.barHeight
     color: Theme.cardBackground
     exclusionMode: ExclusionMode.Auto
 
@@ -27,9 +28,10 @@ PanelWindow {
         Hyprland.monitorFor(root.screen)?.activeWorkspace?.hasFullscreen ?? false
     visible: !fullscreenActive
 
-    WlrLayershell.namespace: "quickshell-leftbar"
-    // Above the other shell surfaces (settings panel is Top layer) so their
-    // cards slide out from behind the bar. The exclusive zone still applies.
+    WlrLayershell.namespace: "quickshell-topbar"
+    // Overlay keeps the bar visible above the settings panel, which sits on
+    // the Top layer. The exclusive zone still applies; the fullscreen check
+    // above is what yields the screen to fullscreen windows.
     WlrLayershell.layer: WlrLayer.Overlay
 
     SystemClock {
@@ -48,22 +50,22 @@ PanelWindow {
         return list.sort((a, b) => a.id - b.id);
     }
 
-    // Right-edge separator, standing in for the card borders used elsewhere.
+    // Bottom-edge separator, standing in for the card borders used elsewhere.
     Rectangle {
         anchors {
+            left: parent.left
             right: parent.right
-            top: parent.top
             bottom: parent.bottom
         }
-        width: 1
+        height: 1
         color: Theme.cardBorder
     }
 
-    ColumnLayout {
+    RowLayout {
         anchors {
             fill: parent
-            topMargin: 8
-            bottomMargin: 8
+            leftMargin: 8
+            rightMargin: 8
         }
         spacing: 6
 
@@ -73,7 +75,7 @@ PanelWindow {
             delegate: Rectangle {
                 required property var modelData // HyprlandWorkspace
 
-                Layout.alignment: Qt.AlignHCenter
+                Layout.alignment: Qt.AlignVCenter
                 width: 28
                 height: 28
                 radius: 8
@@ -95,25 +97,14 @@ PanelWindow {
         }
 
         Item {
-            Layout.fillHeight: true
+            Layout.fillWidth: true
         }
 
-        // The 19-char datetime can't fit horizontally in a thin bar, so it
-        // is rotated to read bottom-to-top. The wrapper Item swaps the
-        // text's width/height so the layout reserves the right space.
-        Item {
-            Layout.alignment: Qt.AlignHCenter
-            implicitWidth: clockText.height
-            implicitHeight: clockText.width
-
-            Text {
-                id: clockText
-                anchors.centerIn: parent
-                rotation: -90
-                text: Qt.formatDateTime(clock.date, "yyyy-MM-dd HH:mm:ss")
-                color: Theme.text
-                font.pixelSize: Theme.fontSize - 2
-            }
+        Text {
+            Layout.alignment: Qt.AlignVCenter
+            text: Qt.formatDateTime(clock.date, "yyyy-MM-dd HH:mm:ss")
+            color: Theme.text
+            font.pixelSize: Theme.fontSize - 2
         }
     }
 }

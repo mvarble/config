@@ -44,6 +44,8 @@ PanelWindow {
             top: parent.top
             right: parent.right
             margins: 12
+            // Clears the TopBar so the first toast isn't hidden behind it.
+            topMargin: Theme.barHeight + 12
         }
         width: Theme.panelWidth
         spacing: 8

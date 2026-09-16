@@ -16,9 +16,10 @@ ColumnLayout {
     property bool enter: false
     default property alias content: body.data
 
-    // Horizontal distance the bounce travels. The panel's outer left margin
-    // reserves exactly this much room, so the card is never cropped
-    // mid-animation; the right margin covers the overshoot.
+    // Horizontal distance the bounce travels. The cards start this far to
+    // the left of the panel's 8px margin and are clipped at the screen edge
+    // for the first part of the animation, so they slide in from off-screen;
+    // the panel's right margin covers the overshoot.
     readonly property int travel: 24
     Layout.rightMargin: 8
 

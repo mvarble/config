@@ -37,10 +37,10 @@ hl.config({
 })
 
 for _, ns in ipairs({
+	"quickshell-topbar",
 	"quickshell-settings",
 	"quickshell-launcher",
 	"quickshell-calendar",
-	"quickshell-workspacebar",
 	"quickshell-notifications",
 	"quickshell-toasts",
 }) do

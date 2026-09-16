@@ -22,8 +22,8 @@ ShellRoot {
         id: calendarPanel
     }
 
-    LeftBar {
-        id: leftBar
+    TopBar {
+        id: topBar
     }
 
     NotificationSidebar {
