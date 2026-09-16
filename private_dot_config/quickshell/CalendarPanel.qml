@@ -121,7 +121,9 @@ PanelWindow {
         width: 700
         height: 520
         anchors.horizontalCenter: parent.horizontalCenter
-        y: 0
+        // Sits just under the TopBar. The 24px enter bounce starts above
+        // this, so the card reads as dropping out from behind the bar.
+        y: Theme.barHeight + 8
         radius: Theme.radius
         color: Theme.cardBackground
         border.color: Theme.cardBorder

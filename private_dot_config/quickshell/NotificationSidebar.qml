@@ -98,6 +98,8 @@ PanelWindow {
             bottom: parent.bottom
             right: parent.right
             margins: 8
+            // Clears the TopBar; the general margin covers the other edges.
+            topMargin: Theme.barHeight + 8
         }
         radius: Theme.radius
         color: Theme.cardBackground

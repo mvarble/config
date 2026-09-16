@@ -53,6 +53,10 @@ PanelWindow {
     exclusionMode: ExclusionMode.Ignore
 
     WlrLayershell.namespace: "quickshell-settings"
+    // Top, not Overlay: Hyprland draws fullscreen windows above the Top
+    // layer, so the panel yields to them. That is deliberate - unlike the
+    // calendar and notification surfaces, this one stays out of the way of
+    // fullscreen content.
     WlrLayershell.layer: WlrLayer.Top
     WlrLayershell.keyboardFocus: open ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None
 
@@ -112,13 +116,15 @@ PanelWindow {
         ColumnLayout {
             anchors {
                 fill: parent
-                // Left margin clears the LeftBar (which sits on the Overlay
-                // layer above this panel), so the sections' bounce animation
-                // (Section.travel = 24) makes cards emerge from behind the
-                // bar rather than being cropped at the screen edge.
-                leftMargin: Theme.barWidth + 5
+                // Left margin matches the notification card's 8px edge gap.
+                // The sections' bounce (Section.travel = 24) starts the cards
+                // partly off-screen and is clipped there, exactly as the
+                // notification card's own 32px travel is against its edge.
+                // Top margin clears the TopBar, which sits on the Overlay
+                // layer above this panel.
+                leftMargin: 8
                 rightMargin: 24
-                topMargin: 0
+                topMargin: Theme.barHeight + 8
                 bottomMargin: 16
             }
             spacing: 12

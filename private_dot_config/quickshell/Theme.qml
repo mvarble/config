@@ -48,7 +48,9 @@ Singleton {
     readonly property int panelWidth: 376
     readonly property int animDuration: 220
 
-    // Width of the persistent LeftBar. SettingsPanel indents its content by
-    // this much so its cards rest clear of (and emerge from behind) the bar.
-    readonly property int barWidth: 40
+    // Height of the persistent TopBar. Every surface that would otherwise
+    // start at the screen top (settings, calendar, notifications, toasts)
+    // offsets its content by this much so nothing hides behind the bar.
+    // Must stay >= the 28px workspace squares plus their padding.
+    readonly property int barHeight: 40
 }
