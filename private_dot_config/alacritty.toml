@@ -32,7 +32,7 @@ style = "Light"
 program = "tmux"
 
 [window]
-opacity = 1.0
+opacity = 0.95
 dynamic_padding = true
 
 [window.dimensions]

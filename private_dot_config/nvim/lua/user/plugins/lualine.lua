@@ -118,7 +118,7 @@ return {
                     normal = {
                         a = { bg = C.blue, fg = C.mantle, gui = "bold" },
                         b = { bg = C.surface0, fg = C.blue },
-                        c = { bg = C.mantle, fg = C.text },
+                        c = { bg = "NONE", fg = C.text },
                     },
 
                     insert = {
@@ -144,9 +144,9 @@ return {
                         b = { bg = C.surface0, fg = C.red },
                     },
                     inactive = {
-                        a = { bg = C.mantle, fg = C.blue },
-                        b = { bg = C.mantle, fg = C.surface1, gui = "bold" },
-                        c = { bg = C.mantle, fg = C.overlay0 },
+                        a = { bg = "NONE", fg = C.blue },
+                        b = { bg = "NONE", fg = C.surface1, gui = "bold" },
+                        c = { bg = "NONE", fg = C.overlay0 },
                     },
                 },
             },
