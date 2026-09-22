@@ -10,7 +10,7 @@ import Quickshell.Wayland
 Scope {
     id: root
 
-    property real idleTimeout: 300
+    property real idleTimeout: 600
 
     readonly property string lockConfig: Quickshell.shellPath("lockscreen.qml")
     // Per display, so concurrent Hyprland sessions don't share snapshots.
