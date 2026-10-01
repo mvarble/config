@@ -5,40 +5,42 @@ run with no reload needed. Before the procedure is handed to the agent, every
 {{title}} token below is replaced with the command's title argument.
 -->
 
-I want you to help me understand a document titled "{{title}}". Work through the following three phases in order.
+This procedure produces a textbook-style companion document for a source document titled "{{title}}". Work through the following three phases in order.
 
 # Parse the document
 
-Attempt to find the document at `source/YYYY-MM-DD-{{title}}.{md|html}` or something close to it. If it is not clear from my title which document I mean, ask me to confirm the exact path before going further. Once you have identified the document, read it in full and understand its contents. In particular, consider:
+Attempt to find the document at `source/YYYY-MM-DD-{{title}}.{md|html}` or something close to it. If the title does not unambiguously identify a single document, confirm the intended path before going further. Once the document is identified, read it in full and understand its contents. In particular, consider:
 
 - What is the overall message and the argument it makes?
 - What supporting material does the argument rest on?
 - What assumptions does the document make?
-- What knowledge and context does the author assume the reader already has?
+- What knowledge and context does the author assume?
 
-# Assess my understanding
+# Assess prior knowledge
 
-Do not assume I have already read the document. For each concept or piece of contextual information the author assumed of the reader, ask me about my level of understanding of it. If my answers warrant further inquiry, keep asking me follow-up questions until you have a good sense of what I actually understand. Before asking about a concept, check `docs/concepts/*`: for any concept documented there, you may assume I already understand it to the extent that its document covers, and you do not need to ask me about that material.
+Do not assume the document has already been read. For each concept or piece of contextual information the author assumes, ask questions to establish the current level of understanding. If the answers warrant further inquiry, keep asking follow-up questions until that understanding is clear; questions may be grouped into a single message rather than asked one at a time. Before asking about a concept, check `docs/concepts/*`: for any concept documented there, understanding may be assumed to the extent that its document covers, and no questions about that material are needed.
 
-# Write me a follow-up document
+# Write the companion document
 
-Once you understand both the source document and my level of knowledge, write a document at `docs/writeups/YYYY-MM-DD-{{title}}.md`, where the date and title are taken from the source document's filename. The document is an analysis of the source document: notes for me to read alongside it so that I can understand it more easily. Its purpose is to help me learn the foundational and contextual knowledge the author assumed of the reader, and to help me understand any complex or unclear concepts the document presents.
+Once both the source document and the current level of knowledge are understood, write a document at `docs/writeups/YYYY-MM-DD-{{title}}.md`, where the date and title are taken from the source document's filename. The companion is an analysis of the source document: a textbook-style chapter, read alongside the source, that develops the foundational and contextual knowledge the source document assumes and clarifies any complex or unclear concepts the source presents.
 
 ## Maintain the concept library
 
-Every concept you address in the follow-up document must have its own document in `docs/concepts/`. Before writing, list the concepts the source document requires and check each against `docs/concepts/*`:
+Every concept addressed in the companion document must have its own document in `docs/concepts/`. Before writing, list the concepts the source document requires and check each against `docs/concepts/*`:
 
 - If a concept is already documented there, link to that existing document. Never rewrite, replace, or duplicate an existing concept document.
-- If a concept is **new** — it is worth addressing for my understanding but was not already present in `docs/concepts/` — it deserves its own new file. Do not treat the follow-up document as a substitute for it, and do not fold it into an existing concept document. Create `docs/concepts/<concept>.md` and link to it from the follow-up document.
+- If a concept is **new** — it is worth addressing but was not already present in `docs/concepts/` — it deserves its own new file. The companion document is not a substitute for it, and the concept must not be folded into an existing concept document. Create `docs/concepts/<concept>.md` and link to it from the companion document.
 
-The bar for "worth addressing" is exactly whether the follow-up document needs to explain the concept to me: any concept that earns a paragraph, section, or explicit definition is worth its own file. A term that is merely mentioned in passing without being explained need not become a concept document. When in doubt, create the file — a concept that helped me understand this document is likely to recur in others.
+The bar for "worth addressing" is exactly whether the companion document must explain the concept: any concept that earns a paragraph, section, or explicit definition is worth its own file. A term merely mentioned in passing without being explained need not become a concept document. When in doubt, create the file — a concept essential to this document is likely to recur in others.
 
-A concept document must be self-contained, written as paragraph prose, and explain the concept on its own terms rather than only as it appears in the source document. Name the file after the concept (for example, `docs/concepts/net-interest-margin.md`) so later /explain runs can discover it.
+A concept document must be self-contained, written as paragraph prose, and explain the concept on its own terms rather than only as it appears in the source document. Each concept document must stand on its own: it explains the concept for its own sake, with its own motivation, significance, examples, and applications. A concept document is not a stepping stone written to support the companion document or any future document — its reason for existing is the concept itself, not the role it plays in explaining something else. Name the file after the concept (for example, `docs/concepts/net-interest-margin.md`) so later /explain runs can discover it.
 
-Wherever you explain a concept — here or in the follow-up document — prefer a concrete example if a suitable one is available: use an example from the source document when it provides one, and otherwise construct a simple illustration of your own. A concept is best understood through an example, so do not settle for an abstract definition when an example would make it clearer.
+Wherever a concept is explained — in a concept document or in the companion — a concrete example is preferred if a suitable one is available: an example from the source document when it provides one, and otherwise a simple illustration. A concept is best understood through an example, so an abstract definition alone is not sufficient when an example would make it clearer. If the concept includes anything mathematical, prefer mathematical expressions written in LaTeX markup — inline math where it reads naturally within a sentence, and displayed equations for anything that needs its own line — rather than plain-text notation or a prose description of the formula.
 
 ## Structure and prose
 
-Begin the follow-up document by stating which document you are summarizing, with a markdown link to the source in `source/`, followed by a list of the concepts discussed, each linked to its document in `docs/concepts`. Every entry in that list must resolve to a real file — an existing concept document or one you created in the previous step.
+Begin the companion document by stating which document is summarized, with a markdown link to the source in `source/`, followed by a list of the concepts discussed, each linked to its document in `docs/concepts`. Every entry in that list must resolve to a real file — an existing concept document or one created in the previous step.
 
-Write the document as paragraph prose, referring to "the document" and "the author": from the writing alone it must be obvious that it discusses another document. Other than referencing the source document itself, the document must be completely self-contained — do not reference anything from this conversation or session.
+Never put a link inside a heading or title. Keep every heading as plain text, and when a section concerns an existing concept document, place the link on its own line directly below the heading, as `See also: [Concept name](../concepts/concept-name.md)`. Use the same `See also:` form for any other link associated with a section, rather than embedding it in the title.
+
+Write the document in the register of a textbook: impersonal third-person exposition, complete sentences in paragraph prose rather than fragments, and no excessive tables or itemized lists. Never address the reader directly and never write in the first person; this is an exposition of a subject, not a set of notes about a conversation. Refer to the source as "the document" and its writer as "the author", so that it is evident from the writing alone that it discusses another document. Apart from referencing the source document, the document must be completely self-contained: it must not reference this conversation or session, and it must read as though written for any reader approaching the subject for the first time.
