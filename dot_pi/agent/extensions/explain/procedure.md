@@ -2,7 +2,9 @@
 This document defines the /explain command. Edit it freely: the extension
 re-reads it on every invocation, so changes take effect on the next /explain
 run with no reload needed. Before the procedure is handed to the agent, every
-{{title}} token below is replaced with the command's title argument.
+{{title}} token below is replaced with the command's title argument, and the
+{{authoring}} token with authoring.md: how to write mathematics, numbered
+equations, statements, proofs and citations.
 -->
 
 This procedure produces a textbook-style companion document for a source document titled "{{title}}". Work through the following three phases in order.
@@ -39,20 +41,6 @@ A concept document must be self-contained, written as paragraph prose, and expla
 
 Wherever a concept is explained — in a concept document or in the companion — a concrete example is preferred if a suitable one is available: an example from the source document when it provides one, and otherwise a simple illustration. A concept is best understood through an example, so an abstract definition alone is not sufficient when an example would make it clearer. If the concept includes anything mathematical, prefer mathematical expressions written in LaTeX markup — inline math where it reads naturally within a sentence, and displayed equations for anything that needs its own line — rather than plain-text notation or a prose description of the formula.
 
-Format mathematical expressions as follows. Inline math uses single dollar signs, as in `$x + y$`. A displayed equation opens with `$$` alone at the beginning of a line, followed by a line break, the equation indented by one tab (multiple lines are allowed), a line break, and a closing `$$` alone on its own line. Every displayed equation follows this shape:
-
-$$
-	f(x) = f(0) + \int_0^x f'(y) {\rm d}y
-$$
-
-$$
-	\begin{aligned}
-		f(x) &= x^2 \\
-		g(x) &= x - 1
-	\end{aligned}
-$$
-
-Never write a displayed equation on the same line as its delimiters, as in `$$f(x) = 0$$`, and never use `\[ ... \]` for displayed math, as in `\[ p(x) = 0 \]`.
 
 ## Frontmatter and description
 
@@ -67,6 +55,8 @@ depends_on: [basis-points, interest-income]
 ```
 
 Beside each new `index.md`, write a `description.md`: one or two plain sentences, with no frontmatter, saying what the document covers. The site shows it as a preview.
+
+{{authoring}}
 
 ## Structure and prose
 

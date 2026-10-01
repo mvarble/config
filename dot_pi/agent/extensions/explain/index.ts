@@ -13,8 +13,10 @@
  *   lives in `concept-procedure.md` next to this file, and every
  *   `{{description}}` token is replaced with the description argument.
  *
- * Both procedures are re-read on every invocation, so edits take effect
- * immediately (no reload required).
+ * Both procedures include `authoring.md` wherever they say `{{authoring}}`:
+ * how to write mathematics, numbered equations, statements, proofs and
+ * citations in a mesearch site. All three files are re-read on every
+ * invocation, so edits take effect immediately (no reload required).
  *
  * Tab-completion for `/explain` suggests titles from <cwd>/source/*.md,
  * matching on either the title or the full date-prefixed filename, newest
@@ -82,6 +84,21 @@ function conceptDocuments(): Concept[] {
 	}
 }
 
+/** A document without its opening comment, which is for whoever edits it, not for the agent. */
+function withoutHeader(text: string): string {
+	return text.replace(/^<!--[\s\S]*?-->\s*/, "");
+}
+
+/** A file beside this one, or an error naming it. */
+function readExtensionFile(name: string): string {
+	const path = join(extensionDir, name);
+	try {
+		return readFileSync(path, "utf-8");
+	} catch (error) {
+		throw new Error(`Could not read ${path}: ${String(error)}`);
+	}
+}
+
 /** Strip the YYYY-MM-DD- prefix and .md suffix from a source filename. */
 function titleFromFilename(filename: string): string {
 	return filename.replace(/^\d{4}-\d{2}-\d{2}-/, "").replace(/\.md$/, "");
@@ -106,16 +123,22 @@ export default function explainExtension(pi: ExtensionAPI) {
 			return;
 		}
 
-		const procedurePath = join(extensionDir, procedureFile);
 		let procedure: string;
+		let authoring: string;
 		try {
-			procedure = readFileSync(procedurePath, "utf-8");
+			procedure = withoutHeader(readExtensionFile(procedureFile));
+			authoring = withoutHeader(readExtensionFile("authoring.md")).trim();
 		} catch (error) {
-			ctx.ui.notify(`Could not read ${procedurePath}: ${String(error)}`, "error");
+			ctx.ui.notify(String(error), "error");
 			return;
 		}
 
-		const message = [`Running ${command} ${value}.`, "", procedure.replaceAll(placeholder, value)].join("\n");
+		// Replaced through functions, so that a `$` in the text (there is plenty
+		// of TeX) is never read as a replacement pattern.
+		const body = procedure
+			.replaceAll("{{authoring}}", () => authoring)
+			.replaceAll(placeholder, () => value);
+		const message = [`Running ${command} ${value}.`, "", body].join("\n");
 
 		if (ctx.isIdle()) {
 			pi.sendUserMessage(message);
