@@ -1,0 +1,22 @@
+{
+  "lastChangelogVersion": "0.99.2",
+  "theme": "light",
+  "packages": [
+    "npm:pi-web-access",
+    "npm:pi-subagents",
+    "npm:@juicesharp/rpiv-ask-user-question"
+  ],
+  "defaultProvider": "openrouter",
+  "defaultModel": "deepseek/deepseek-v4.1-flash",
+  "modelThinkingLevels": {
+    "openrouter/deepseek/deepseek-v4-flash": "xhigh"
+  },
+  "hideThinkingBlock": false,
+  "outputPad": 1,
+  "editorPaddingX": 1,
+  "enabledModels": [
+    "openrouter/deepseek/deepseek-v4.1-flash",
+    "openrouter/z-ai/glm-5.3",
+    "openrouter/qwen/qwen3.7-max"
+  ]
+}

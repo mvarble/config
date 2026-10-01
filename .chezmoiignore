@@ -1,6 +1,24 @@
-~/.config/fish/fundle/*
-~/.config/nvim/lazy-lock.json
-~/.config/tmux/plugins/*
-!~/.config/tmux/plugins/tpm
-~/.config/hypr/ratcage.hyprland.lua
-~/.config/hypr/default.hyprland.lua
+# NOTE: patterns are matched against target paths relative to $HOME; a leading
+# "~/" makes a pattern a no-op, so never prefix entries with "~".
+
+# Fish plugin manager plugins are installed per-machine.
+.config/fish/fundle/*
+.config/nvim/lazy-lock.json
+.config/tmux/plugins/*
+!.config/tmux/plugins/tpm
+
+# Per-host Hyprland partials: included by hyprland.lua.tmpl, not applied directly.
+.config/hypr/ratcage.hyprland.lua
+.config/hypr/default.hyprland.lua
+
+# Pi agent state that must not be shared (secrets, sessions, caches, installs).
+.pi/agent/auth.json
+.pi/agent/trust.json
+.pi/agent/models-store.json
+.pi/agent/bin
+.pi/agent/install
+.pi/agent/npm/*
+!.pi/agent/npm/package.json
+.pi/agent/pi-subagents
+.pi/agent/sessions
+.pi/agent/agents/.rpiv-managed.json
