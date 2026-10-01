@@ -35,6 +35,8 @@ The bar for "worth addressing" is exactly whether the follow-up document needs t
 
 A concept document must be self-contained, written as paragraph prose, and explain the concept on its own terms rather than only as it appears in the source document. Name the file after the concept (for example, `docs/concepts/net-interest-margin.md`) so later /explain runs can discover it.
 
+Wherever you explain a concept — here or in the follow-up document — prefer a concrete example if a suitable one is available: use an example from the source document when it provides one, and otherwise construct a simple illustration of your own. A concept is best understood through an example, so do not settle for an abstract definition when an example would make it clearer.
+
 ## Structure and prose
 
 Begin the follow-up document by stating which document you are summarizing, with a markdown link to the source in `source/`, followed by a list of the concepts discussed, each linked to its document in `docs/concepts`. Every entry in that list must resolve to a real file — an existing concept document or one you created in the previous step.
