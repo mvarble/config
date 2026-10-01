@@ -4,11 +4,12 @@
  * Registers two commands:
  *
  * - `/explain <title>` explains a source document and writes a companion in
- *   `docs/writeups/`. Its procedure lives in `procedure.md` next to this file,
+ *   `docs/writeups/<slug>/`. Its procedure lives in `procedure.md` next to this file,
  *   and every `{{title}}` token in that document is replaced with the title
  *   argument.
  * - `/explain-concept <description>` assesses the reader's knowledge of a
- *   concept and writes one or more documents that teach it. Its procedure
+ *   concept and writes one or more documents that teach it, one folder each in
+ *   `docs/concepts/`. Its procedure
  *   lives in `concept-procedure.md` next to this file, and every
  *   `{{description}}` token is replaced with the description argument.
  *
@@ -17,8 +18,10 @@
  *
  * Tab-completion for `/explain` suggests titles from <cwd>/source/*.md,
  * matching on either the title or the full date-prefixed filename, newest
- * first. For `/explain-concept` it suggests documented concept names from
- * <cwd>/docs/concepts/*.md.
+ * first. For `/explain-concept` it suggests documented concepts from
+ * <cwd>/docs/concepts/<slug>/index.{md,svx}, by title.
+ *
+ * Documents follow the layout of a mesearch site; see the project's AGENTS.md.
  */
 
 import { existsSync, readdirSync, readFileSync } from "node:fs";
@@ -43,9 +46,40 @@ function sourceDocuments(): string[] {
 	return markdownFiles(join(process.cwd(), "source")).sort().reverse();
 }
 
-/** Concept documents in <cwd>/docs/concepts/, alphabetical. */
-function conceptDocuments(): string[] {
-	return markdownFiles(join(process.cwd(), "docs", "concepts")).sort();
+interface Concept {
+	slug: string;
+	title: string;
+}
+
+/** The `title` in a document's frontmatter, if it has one. */
+function frontmatterTitle(file: string): string | undefined {
+	try {
+		const head = /^---\r?\n([\s\S]*?)\r?\n---/.exec(readFileSync(file, "utf-8"))?.[1] ?? "";
+		const title = /^title:\s*(.+?)\s*$/m.exec(head)?.[1];
+		return title?.replace(/^(['"])(.*)\1$/, "$2");
+	} catch {
+		return undefined;
+	}
+}
+
+/** Concept folders in <cwd>/docs/concepts/, alphabetical, with their titles. */
+function conceptDocuments(): Concept[] {
+	const dir = join(process.cwd(), "docs", "concepts");
+	try {
+		if (!existsSync(dir)) return [];
+		return readdirSync(dir, { withFileTypes: true })
+			.filter((entry) => entry.isDirectory())
+			.map((entry) => {
+				const index = ["index.md", "index.svx"]
+					.map((name) => join(dir, entry.name, name))
+					.find((file) => existsSync(file));
+				return index ? { slug: entry.name, title: frontmatterTitle(index) ?? entry.name } : undefined;
+			})
+			.filter((concept): concept is Concept => !!concept)
+			.sort((a, b) => a.slug.localeCompare(b.slug));
+	} catch {
+		return [];
+	}
 }
 
 /** Strip the YYYY-MM-DD- prefix and .md suffix from a source filename. */
@@ -124,12 +158,14 @@ export default function explainExtension(pi: ExtensionAPI) {
 
 		getArgumentCompletions: (prefix) => {
 			const p = prefix.trim().toLowerCase();
-			const matches = conceptDocuments().filter((f) => f.toLowerCase().includes(p));
+			const matches = conceptDocuments().filter(
+				(c) => c.slug.includes(p) || c.title.toLowerCase().includes(p),
+			);
 			if (matches.length === 0) return null;
-			return matches.slice(0, 20).map((f) => ({
-				value: titleFromFilename(f),
-				label: titleFromFilename(f),
-				description: f,
+			return matches.slice(0, 20).map((c) => ({
+				value: c.title,
+				label: c.title,
+				description: `docs/concepts/${c.slug}/`,
 			}));
 		},
 
