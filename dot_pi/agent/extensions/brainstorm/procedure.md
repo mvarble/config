@@ -75,3 +75,24 @@ where the solutions may change under the new goal.
   self-contained: when re-running, rewrite documents from scratch so that each
   one stands alone under the current goal, rather than describing changes
   against what was written before.
+
+Mathematical expressions are written in LaTeX. Inline math uses single dollar
+signs, as in `$x + y$`. A displayed equation opens with `$$` alone at the
+beginning of a line, followed by a line break, the equation indented by one
+tab (multiple lines are allowed), a line break, and a closing `$$` alone on
+its own line. Every displayed equation follows this shape:
+
+$$
+	f(x) = f(0) + \int_0^x f'(y) {\rm d}y
+$$
+
+$$
+	\begin{aligned}
+		f(x) &= x^2 \\
+		g(x) &= x - 1
+	\end{aligned}
+$$
+
+Never write a displayed equation on the same line as its delimiters, as in
+`$$f(x) = 0$$`, and never use `\[ ... \]` for displayed math, as in
+`\[ p(x) = 0 \]`.
