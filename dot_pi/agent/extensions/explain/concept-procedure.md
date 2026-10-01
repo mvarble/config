@@ -45,6 +45,21 @@ A concept document must be self-contained, written as paragraph prose, and expla
 
 Wherever a concept is explained, a concrete example is preferred if a suitable one is available: an example from the material at hand when it provides one, and otherwise a simple illustration. A concept is best understood through an example, so an abstract definition alone is not sufficient when an example would make it clearer. If the concept includes anything mathematical, prefer mathematical expressions written in LaTeX markup — inline math where it reads naturally within a sentence, and displayed equations for anything that needs its own line — rather than plain-text notation or a prose description of the formula.
 
+Format mathematical expressions as follows. Inline math uses single dollar signs, as in `$x + y$`. A displayed equation opens with `$$` alone at the beginning of a line, followed by a line break, the equation indented by one tab (multiple lines are allowed), a line break, and a closing `$$` alone on its own line. Every displayed equation follows this shape:
+
+$$
+	f(x) = f(0) + \int_0^x f'(y) {\rm d}y
+$$
+
+$$
+	\begin{aligned}
+		f(x) &= x^2 \\
+		g(x) &= x - 1
+	\end{aligned}
+$$
+
+Never write a displayed equation on the same line as its delimiters, as in `$$f(x) = 0$$`, and never use `\[ ... \]` for displayed math, as in `\[ p(x) = 0 \]`.
+
 ## Structure and prose
 
 Write each document in the register of a textbook: impersonal third-person exposition in paragraph prose, complete sentences rather than fragments, and no excessive tables or itemized lists. Never address the reader directly and never write in the first person; these are expositions of a subject, not notes about a conversation. Each document must be self-contained: it must not reference this conversation or session, and it must not assume any document has been read other than those explicitly linked as prerequisites. When a document builds on another, say so near the top with a link, for example "This document builds on [Basis points](./basis-points.md).", so the chain of documents is easy to follow. Backward links to prerequisite concepts are expected and encouraged; forward links to concepts that build on the current one should be placed sparingly (typically at the end) and must never be used to frame the document's purpose or motivation.
