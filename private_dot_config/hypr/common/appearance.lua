@@ -32,7 +32,7 @@ hl.config({
 hl.config({
 	scrolling = {
 		fullscreen_on_one_column = false,
-		column_width = 0.45,
+		column_width = 0.48,
 	},
 })
 
