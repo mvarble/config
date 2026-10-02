@@ -9,38 +9,38 @@ write mathematics, numbered equations, statements, proofs and citations.
 
 This procedure produces a textbook-style document (or set of documents) explaining the concept described as "{{description}}". Work through the following three phases in order.
 
-The documents live in a [mesearch](https://github.com/mvarble/mesearch) site: one folder per document under `docs/`, so a concept is `docs/concepts/<slug>/index.md`. If the project has an `AGENTS.md`, read it before anything else. Its conventions for this site (layout, frontmatter, links, notation, and any site-specific opinions) take precedence over this procedure wherever the two differ.
+The documents live in a [mesearch](https://github.com/mvarble/mesearch) site: one folder per document under `content/`, so a concept is `content/concepts/<slug>/index.md`. If the project has an `AGENTS.md`, read it before anything else. Its conventions for this site (layout, frontmatter, links, notation, and any site-specific opinions) take precedence over this procedure wherever the two differ.
 
 # Identify the concept
 
 Resolve the description into one clearly named concept. The description may be loose, partial, or may point at an idea without naming it; if it is ambiguous, or could reasonably mean several distinct concepts, ask for clarification before going further. Once confident, state the concept that will be explained.
 
-Then check `docs/concepts/*/`:
+Then check `content/concepts/*/`:
 
 - If a document for this concept already exists, link it and state what it already covers. Treat that existing document as the foundation of this run — it must not be rewritten, replaced, or duplicated.
 - If it does not exist, this run will create it.
 
 # Assess prior knowledge
 
-Do not assume the concept is already known. Ask about it, and about the concepts it builds on, and keep asking follow-up questions until the current level of understanding is clear. Before asking about a concept, check `docs/concepts/*/`: for any concept documented there, understanding may be assumed to the extent that its document covers, and no questions about that material are needed.
+Do not assume the concept is already known. Ask about it, and about the concepts it builds on, and keep asking follow-up questions until the current level of understanding is clear. Before asking about a concept, check `content/concepts/*/`: for any concept documented there, understanding may be assumed to the extent that its document covers, and no questions about that material are needed.
 
 Many concepts rest on others. A missing prerequisite is itself a concept worth explaining, and explaining it may be the best route to the concept originally requested. Keep track of these prerequisites as you go; they determine the documents written next.
 
 # Write the document (or several)
 
-Write documents under `docs/concepts/` that explain the concept and everything it depends on.
+Write documents under `content/concepts/` that explain the concept and everything it depends on.
 
-- If the concept is one idea a single document can carry, write `docs/concepts/<concept>/index.md`.
+- If the concept is one idea a single document can carry, write `content/concepts/<concept>/index.md`.
 - If it is composite — really several ideas standing on one another — write one document per idea, building them in dependency order so that each document relies only on concepts explained before it. A single file must not be overloaded with material that deserves its own.
 
-Name each folder after the concept it explains (for example, `docs/concepts/net-interest-margin/index.md`) so later runs can discover it.
+Name each folder after the concept it explains (for example, `content/concepts/net-interest-margin/index.md`) so later runs can discover it.
 
 ## Maintain the concept library
 
-Every concept addressed must have its own document in `docs/concepts/`. Before writing, list the concepts the explanation requires and check each against `docs/concepts/*/`:
+Every concept addressed must have its own document in `content/concepts/`. Before writing, list the concepts the explanation requires and check each against `content/concepts/*/`:
 
 - If a concept is already documented there, link to that existing document. Never rewrite, replace, or duplicate an existing concept document.
-- If a concept is **new** — it is worth addressing but was not already present in `docs/concepts/` — it deserves its own file. Create `docs/concepts/<concept>/index.md` and link to it from the documents that depend on it.
+- If a concept is **new** — it is worth addressing but was not already present in `content/concepts/` — it deserves its own file. Create `content/concepts/<concept>/index.md` and link to it from the documents that depend on it.
 
 The bar for "worth addressing" is exactly whether a document must explain the concept: any concept that earns a paragraph, section, or explicit definition is worth its own file. A term merely mentioned in passing without being explained need not become a concept document. When in doubt, create the file — a concept essential to this one is likely to recur in others.
 

@@ -39,7 +39,7 @@ Refer to it as `[](eq:additivity)`, which renders as its number, as in "(2)". Fr
 
 ## Statements and proofs
 
-A definition, theorem, lemma, proposition, corollary, remark or example that the text states formally and refers back to is a **statement**: a short document of its own in a `statements/` folder beside the document that shows it, such as `docs/concepts/compactness/statements/heine-borel.md`.
+A definition, theorem, lemma, proposition, corollary, remark or example that the text states formally and refers back to is a **statement**: a short document of its own in a `statements/` folder beside the document that shows it, such as `content/concepts/compactness/statements/heine-borel.md`.
 
 ```yaml
 ---
@@ -77,7 +77,7 @@ Take an open cover of $[a, b]$ ...
 
 ## Citations
 
-Bibliography entries go in BibTeX files anywhere under `docs/`, usually `docs/references.bib`. Keys are shared across the site, so check whether an entry already exists before adding one, and name new keys `<surname><year>`, as `folland1999`. Give each entry its `author`, `title`, `year`, and whichever of `journal`, `volume`, `number`, `pages`, `publisher`, `edition` and `doi` apply.
+Bibliography entries go in BibTeX files anywhere under `content/`, usually `content/references.bib`. Keys are shared across the site, so check whether an entry already exists before adding one, and name new keys `<surname><year>`, as `folland1999`. Give each entry its `author`, `title`, `year`, and whichever of `journal`, `volume`, `number`, `pages`, `publisher`, `edition` and `doi` apply.
 
 ```bibtex
 @book{folland1999,

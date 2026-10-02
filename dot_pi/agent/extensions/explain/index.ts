@@ -4,12 +4,12 @@
  * Registers two commands:
  *
  * - `/explain <title>` explains a source document and writes a companion in
- *   `docs/writeups/<slug>/`. Its procedure lives in `procedure.md` next to this file,
+ *   `content/writeups/<slug>/`. Its procedure lives in `procedure.md` next to this file,
  *   and every `{{title}}` token in that document is replaced with the title
  *   argument.
  * - `/explain-concept <description>` assesses the reader's knowledge of a
  *   concept and writes one or more documents that teach it, one folder each in
- *   `docs/concepts/`. Its procedure
+ *   `content/concepts/`. Its procedure
  *   lives in `concept-procedure.md` next to this file, and every
  *   `{{description}}` token is replaced with the description argument.
  *
@@ -21,7 +21,7 @@
  * Tab-completion for `/explain` suggests titles from <cwd>/source/*.md,
  * matching on either the title or the full date-prefixed filename, newest
  * first. For `/explain-concept` it suggests documented concepts from
- * <cwd>/docs/concepts/<slug>/index.{md,svx}, by title.
+ * <cwd>/content/concepts/<slug>/index.{md,svx}, by title.
  *
  * Documents follow the layout of a mesearch site; see the project's AGENTS.md.
  */
@@ -64,9 +64,9 @@ function frontmatterTitle(file: string): string | undefined {
 	}
 }
 
-/** Concept folders in <cwd>/docs/concepts/, alphabetical, with their titles. */
+/** Concept folders in <cwd>/content/concepts/, alphabetical, with their titles. */
 function conceptDocuments(): Concept[] {
-	const dir = join(process.cwd(), "docs", "concepts");
+	const dir = join(process.cwd(), "content", "concepts");
 	try {
 		if (!existsSync(dir)) return [];
 		return readdirSync(dir, { withFileTypes: true })
@@ -149,7 +149,7 @@ export default function explainExtension(pi: ExtensionAPI) {
 	}
 
 	pi.registerCommand("explain", {
-		description: "Explain a source/ document and write a docs/writeups/ companion",
+		description: "Explain a source/ document and write a content/writeups/ companion",
 
 		getArgumentCompletions: (prefix) => {
 			const p = prefix.trim().toLowerCase();
@@ -177,7 +177,7 @@ export default function explainExtension(pi: ExtensionAPI) {
 	});
 
 	pi.registerCommand("explain-concept", {
-		description: "Assess my knowledge of a concept and write docs/concepts/ document(s)",
+		description: "Assess my knowledge of a concept and write content/concepts/ document(s)",
 
 		getArgumentCompletions: (prefix) => {
 			const p = prefix.trim().toLowerCase();
@@ -188,7 +188,7 @@ export default function explainExtension(pi: ExtensionAPI) {
 			return matches.slice(0, 20).map((c) => ({
 				value: c.title,
 				label: c.title,
-				description: `docs/concepts/${c.slug}/`,
+				description: `content/concepts/${c.slug}/`,
 			}));
 		},
 
