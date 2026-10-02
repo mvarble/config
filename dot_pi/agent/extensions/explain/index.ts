@@ -4,21 +4,26 @@
  * Registers two commands:
  *
  * - `/explain <title>` explains a source document and writes a companion in
- *   `docs/writeups/`. Its procedure lives in `procedure.md` next to this file,
+ *   `content/writeups/<slug>/`. Its procedure lives in `procedure.md` next to this file,
  *   and every `{{title}}` token in that document is replaced with the title
  *   argument.
  * - `/explain-concept <description>` assesses the reader's knowledge of a
- *   concept and writes one or more documents that teach it. Its procedure
+ *   concept and writes one or more documents that teach it, one folder each in
+ *   `content/concepts/`. Its procedure
  *   lives in `concept-procedure.md` next to this file, and every
  *   `{{description}}` token is replaced with the description argument.
  *
- * Both procedures are re-read on every invocation, so edits take effect
- * immediately (no reload required).
+ * Both procedures include `authoring.md` wherever they say `{{authoring}}`:
+ * how to write mathematics, numbered equations, statements, proofs and
+ * citations in a mesearch site. All three files are re-read on every
+ * invocation, so edits take effect immediately (no reload required).
  *
  * Tab-completion for `/explain` suggests titles from <cwd>/source/*.md,
  * matching on either the title or the full date-prefixed filename, newest
- * first. For `/explain-concept` it suggests documented concept names from
- * <cwd>/docs/concepts/*.md.
+ * first. For `/explain-concept` it suggests documented concepts from
+ * <cwd>/content/concepts/<slug>/index.{md,svx}, by title.
+ *
+ * Documents follow the layout of a mesearch site; see the project's AGENTS.md.
  */
 
 import { existsSync, readdirSync, readFileSync } from "node:fs";
@@ -43,9 +48,55 @@ function sourceDocuments(): string[] {
 	return markdownFiles(join(process.cwd(), "source")).sort().reverse();
 }
 
-/** Concept documents in <cwd>/docs/concepts/, alphabetical. */
-function conceptDocuments(): string[] {
-	return markdownFiles(join(process.cwd(), "docs", "concepts")).sort();
+interface Concept {
+	slug: string;
+	title: string;
+}
+
+/** The `title` in a document's frontmatter, if it has one. */
+function frontmatterTitle(file: string): string | undefined {
+	try {
+		const head = /^---\r?\n([\s\S]*?)\r?\n---/.exec(readFileSync(file, "utf-8"))?.[1] ?? "";
+		const title = /^title:\s*(.+?)\s*$/m.exec(head)?.[1];
+		return title?.replace(/^(['"])(.*)\1$/, "$2");
+	} catch {
+		return undefined;
+	}
+}
+
+/** Concept folders in <cwd>/content/concepts/, alphabetical, with their titles. */
+function conceptDocuments(): Concept[] {
+	const dir = join(process.cwd(), "content", "concepts");
+	try {
+		if (!existsSync(dir)) return [];
+		return readdirSync(dir, { withFileTypes: true })
+			.filter((entry) => entry.isDirectory())
+			.map((entry) => {
+				const index = ["index.md", "index.svx"]
+					.map((name) => join(dir, entry.name, name))
+					.find((file) => existsSync(file));
+				return index ? { slug: entry.name, title: frontmatterTitle(index) ?? entry.name } : undefined;
+			})
+			.filter((concept): concept is Concept => !!concept)
+			.sort((a, b) => a.slug.localeCompare(b.slug));
+	} catch {
+		return [];
+	}
+}
+
+/** A document without its opening comment, which is for whoever edits it, not for the agent. */
+function withoutHeader(text: string): string {
+	return text.replace(/^<!--[\s\S]*?-->\s*/, "");
+}
+
+/** A file beside this one, or an error naming it. */
+function readExtensionFile(name: string): string {
+	const path = join(extensionDir, name);
+	try {
+		return readFileSync(path, "utf-8");
+	} catch (error) {
+		throw new Error(`Could not read ${path}: ${String(error)}`);
+	}
 }
 
 /** Strip the YYYY-MM-DD- prefix and .md suffix from a source filename. */
@@ -72,16 +123,22 @@ export default function explainExtension(pi: ExtensionAPI) {
 			return;
 		}
 
-		const procedurePath = join(extensionDir, procedureFile);
 		let procedure: string;
+		let authoring: string;
 		try {
-			procedure = readFileSync(procedurePath, "utf-8");
+			procedure = withoutHeader(readExtensionFile(procedureFile));
+			authoring = withoutHeader(readExtensionFile("authoring.md")).trim();
 		} catch (error) {
-			ctx.ui.notify(`Could not read ${procedurePath}: ${String(error)}`, "error");
+			ctx.ui.notify(String(error), "error");
 			return;
 		}
 
-		const message = [`Running ${command} ${value}.`, "", procedure.replaceAll(placeholder, value)].join("\n");
+		// Replaced through functions, so that a `$` in the text (there is plenty
+		// of TeX) is never read as a replacement pattern.
+		const body = procedure
+			.replaceAll("{{authoring}}", () => authoring)
+			.replaceAll(placeholder, () => value);
+		const message = [`Running ${command} ${value}.`, "", body].join("\n");
 
 		if (ctx.isIdle()) {
 			pi.sendUserMessage(message);
@@ -92,7 +149,7 @@ export default function explainExtension(pi: ExtensionAPI) {
 	}
 
 	pi.registerCommand("explain", {
-		description: "Explain a source/ document and write a docs/writeups/ companion",
+		description: "Explain a source/ document and write a content/writeups/ companion",
 
 		getArgumentCompletions: (prefix) => {
 			const p = prefix.trim().toLowerCase();
@@ -120,16 +177,18 @@ export default function explainExtension(pi: ExtensionAPI) {
 	});
 
 	pi.registerCommand("explain-concept", {
-		description: "Assess my knowledge of a concept and write docs/concepts/ document(s)",
+		description: "Assess my knowledge of a concept and write content/concepts/ document(s)",
 
 		getArgumentCompletions: (prefix) => {
 			const p = prefix.trim().toLowerCase();
-			const matches = conceptDocuments().filter((f) => f.toLowerCase().includes(p));
+			const matches = conceptDocuments().filter(
+				(c) => c.slug.includes(p) || c.title.toLowerCase().includes(p),
+			);
 			if (matches.length === 0) return null;
-			return matches.slice(0, 20).map((f) => ({
-				value: titleFromFilename(f),
-				label: titleFromFilename(f),
-				description: f,
+			return matches.slice(0, 20).map((c) => ({
+				value: c.title,
+				label: c.title,
+				description: `content/concepts/${c.slug}/`,
 			}));
 		},
 
