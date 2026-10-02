@@ -4,7 +4,7 @@ set fish_greeting
 # update PATH
 fish_add_path /home/mvarble/.cargo/bin
 fish_add_path /home/mvarble/.local/bin
-fish_add_path /home/mvarble/.local/share/fnm
+fish_add_path /home/mvarble/.local/share/pnpm/bin
 fish_add_path /home/mvarble/.pixi/bin
 fish_add_path /home/mvarble/.local/share/commands
 
