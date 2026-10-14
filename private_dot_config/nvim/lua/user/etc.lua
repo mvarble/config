@@ -59,7 +59,7 @@ vim.api.nvim_create_autocmd("FileType", {
 			return
 		end
 		local filetype = vim.bo.filetype
-		for _, ft in ipairs({ "yaml", "markdown", "toml", "json", "proto", "cmake" }) do
+		for _, ft in ipairs({ "markdown", "toml", "proto", "cmake" }) do
 			if filetype == ft then
 				vim.opt.tabstop = 2
 				vim.opt.shiftwidth = 2
