@@ -1,0 +1,45 @@
+{{- if eq .chezmoi.hostname "gca-7sjgnd4" -}}
+{
+  "providers": {
+    "Toyon vLLM": {
+      "baseUrl": "https://nemotron.tide.toyon.corp/v1",
+      "api": "openai-completions",
+      "apiKey": "sk-not-required",
+      "models": [
+        {
+          "id": "nemotron-3.5-super-vl",
+          "name": "Nemotron 3.5 Super VL",
+          "contextWindow": 1048576,
+          "maxTokens": 32768,
+          "reasoning": true
+        }
+      ]
+    },
+    "Amazon Bedrock Mantle (GovCloud)": {
+      "baseUrl": "https://bedrock-mantle.us-gov-west-1.api.aws/anthropic",
+      "api": "anthropic-messages",
+      "models": [
+        {
+          "id": "anthropic.claude-opus-5-5",
+          "name": "Claude Opus 5.5",
+          "reasoning": true,
+          "input": ["text", "image"],
+          "contextWindow": 1000000,
+          "maxTokens": 128000,
+          "compat": {
+            "forceAdaptiveThinking": true
+          },
+          "cost": {
+            "input": 4.8,
+            "output": 24.0,
+            "cacheRead": 0.24,
+            "cacheWrite": 6.0
+          }
+        }
+      ]
+    }
+  }
+}
+{{- else -}}
+{}
+{{- end -}}

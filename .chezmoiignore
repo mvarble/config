@@ -22,3 +22,5 @@
 .pi/agent/pi-subagents
 .pi/agent/sessions
 .pi/agent/agents/.rpiv-managed.json
+.pi/agent/mcp-cache.json
+.pi/agent/mcp-auth.json
