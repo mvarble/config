@@ -1,11 +1,11 @@
 {
-  "mcpServers": {
-    {{- if eq .chezmoi.hostname "gca-7sjgnd4" -}}
-    "toyon": {
-      "url": "https://rag.tchat.toyon.corp/mcp/v1",
-      "exposure": "direct",
-      "description": "Search Toyon's internal document archive for contracts, job documents, proposals, and other records using natural language queries."
+    "mcpServers": {
+{{if eq .chezmoi.hostname "gca-7sjgnd4"}}
+        "toyon": {
+            "url": "https://rag.tchat.toyon.corp/mcp/v1",
+            "exposure": "direct",
+            "description": "Search Toyon's internal document archive for contracts, job documents, proposals, and other records using natural language queries."
+        }
+{{end}}
     }
-    {{- end -}}
-  }
 }
