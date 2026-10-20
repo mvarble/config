@@ -3,6 +3,7 @@
 
 # Fish plugin manager plugins are installed per-machine.
 .config/fish/fundle/*
+.config/fish/fish_variables
 .config/nvim/lazy-lock.json
 .config/tmux/plugins/*
 !.config/tmux/plugins/tpm
