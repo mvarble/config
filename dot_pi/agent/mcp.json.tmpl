@@ -1,6 +1,6 @@
 {
     "mcpServers": {
-{{if eq .chezmoi.hostname "gca-7sjgnd4" || eq .chezmoi.hostname "GCA-5QG1DK3"}}
+{{if or (eq .chezmoi.hostname "gca-7sjgnd4") (eq .chezmoi.hostname "GCA-5QG1DK3") }}
         "toyon": {
             "url": "https://rag.tchat.toyon.corp/mcp/v1",
             "exposure": "direct",
