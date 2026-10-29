@@ -5,7 +5,8 @@ import Quickshell.Hyprland
 import Quickshell.Wayland
 
 // Thin persistent bar along the top screen edge showing the Hyprland
-// workspaces (click to switch) on the left and a ticking clock on the right.
+// workspaces (click to switch) on the left, a minimap of the active
+// workspace's scrolling strip in the middle, and a ticking clock on the right.
 // Reserves screen space via the layer-shell exclusive zone, so tiled windows
 // sit below it. Hides itself while a window is fullscreened on this bar's
 // monitor.
@@ -59,6 +60,13 @@ PanelWindow {
         }
         height: 1
         color: Theme.cardBorder
+    }
+
+    // Centered on the bar itself rather than placed in the row, so it stays
+    // put while the workspace list and clock change width.
+    StripMap {
+        anchors.centerIn: parent
+        monitor: Hyprland.monitorFor(root.screen)
     }
 
     RowLayout {
