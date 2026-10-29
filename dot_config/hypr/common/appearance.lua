@@ -10,6 +10,8 @@ hl.config({
 		resize_on_border = false,
 		allow_tearing = false,
 		layout = "scrolling",
+		-- Moving focus past the end of the strip does nothing, instead of jumping to the window at the screen's other edge
+		no_focus_fallback = true,
 	},
 
 	decoration = {
