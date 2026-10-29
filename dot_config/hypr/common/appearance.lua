@@ -32,7 +32,8 @@ hl.config({
 hl.config({
 	scrolling = {
 		fullscreen_on_one_column = false,
-		column_width = 0.48,
+		-- Two columns must span the whole view, or the layout pins the strip centered and ALT + N can't center one
+		column_width = 0.5,
 	},
 })
 
