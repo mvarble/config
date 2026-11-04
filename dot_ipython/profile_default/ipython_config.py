@@ -1,0 +1,1 @@
+c.TerminalInteractiveShell.colors = "lightbg"
