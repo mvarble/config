@@ -56,6 +56,9 @@ M.config = {
     -- Entries matching these are dropped from PATH and LD_LIBRARY_PATH.
     scrub_path_patterns = { "^/opt/ros/" },
     ready_timeout_ms = 120000, -- pixi may install the env on first run
+    -- Non-blocking plot windows: 'auto' picks Qt, else Tk, from what each environment has
+    -- (sets IPython's --matplotlib=<gui>). Or force 'qt' / 'tk', or false to leave it alone.
+    matplotlib = "auto",
     -- Runtime completion for nvim-cmp (add { name = 'pysession' } to your cmp sources).
     completion = true,
     completion_timeout_ms = 500, -- give up quietly if the session is busy/hung
@@ -710,6 +713,77 @@ local function wait_ready(s, src)
     poll()
 end
 
+-- Startup check, run in the exact environment the session will get. Fails if IPython is
+-- missing; otherwise reports what plotting support the environment has.
+local PROBE_PY = [[
+import os, sys, json, subprocess, importlib.util as u
+import IPython
+has = lambda m: u.find_spec(m) is not None
+mpl = has("matplotlib")
+qt = next((m for m in ("PyQt6", "PySide6", "PyQt5", "PySide2") if has(m)), None)
+qt_error = None
+if mpl and qt and (os.environ.get("DISPLAY") or os.environ.get("WAYLAND_DISPLAY")):
+    # Qt aborts the whole process if it can't open a window, so try it out-of-process.
+    try:
+        r = subprocess.run([sys.executable, "-c",
+                            f"from {qt}.QtWidgets import QApplication; QApplication([])"],
+                           capture_output=True, text=True, timeout=20)
+        if r.returncode != 0:
+            lines = [l for l in r.stderr.splitlines() if l.strip()]
+            hint = [l for l in lines if "needed" in l or "Could not" in l]
+            qt_error = (hint or lines or [f"exit code {r.returncode}"])[0][:300]
+    except Exception as e:
+        qt_error = repr(e)
+print(json.dumps({"python": sys.executable, "matplotlib": mpl, "qt": qt,
+                  "qt_error": qt_error, "tk": has("_tkinter")}))
+]]
+
+-- Decide the --matplotlib GUI for a session; returns { gui = 'qt'|'tk', qt_api = ... } or nil.
+local function plot_backend(launcher, probe, env)
+    local want = M.config.matplotlib
+    if not want or not probe.matplotlib then
+        return nil
+    end
+    -- Same rule matplotlib uses on Linux: without these it refuses GUI backends.
+    if not (env.DISPLAY or env.WAYLAND_DISPLAY) then
+        notify(
+            launcher.label
+                .. ": no display (DISPLAY/WAYLAND_DISPLAY unset), so plots stay "
+                .. "non-interactive; save them with fig.savefig() instead",
+            vim.log.levels.WARN
+        )
+        return nil
+    end
+    local qt_ok = (want == "auto" or want == "qt") and probe.qt and not probe.qt_error
+    local tk_ok = (want == "auto" or want == "tk") and probe.tk
+    if probe.qt and probe.qt_error and want ~= "tk" then
+        notify(
+            ("%s: %s is installed but cannot open windows%s:\n  %s"):format(
+                launcher.label,
+                probe.qt,
+                tk_ok and " (using Tk instead)" or "",
+                probe.qt_error
+            ),
+            vim.log.levels.WARN
+        )
+    end
+    if qt_ok then
+        return { gui = "qt", qt_api = probe.qt:lower() }
+    elseif tk_ok then
+        return { gui = "tk" }
+    elseif probe.qt_error then
+        -- Already explained above. Keep matplotlib off Qt, or the first plot aborts IPython.
+        return { mplbackend = "Agg" }
+    end
+    notify(
+        (
+            "%s has matplotlib but no %s, so plt.show() will block. Add a GUI toolkit to the "
+            .. "environment (e.g. `uv pip install pyqt6`, or tkinter for your Python)."
+        ):format(launcher.label, want == "auto" and "Qt/Tk binding" or want),
+        vim.log.levels.WARN
+    )
+end
+
 local function launch(src, launcher, opts)
     opts = opts or {}
     local file = vim.api.nvim_buf_get_name(src)
@@ -720,7 +794,16 @@ local function launch(src, launcher, opts)
     local term = vim.api.nvim_create_buf(false, false)
     open_window(term)
     local cmd = list_concat(launcher.python, { "-m", "IPython" }, M.config.ipython_args)
-    local s = { term = term, launcher = launcher, ready = false, queue = opts.queue or {} }
+    if opts.gui and opts.gui.gui then
+        table.insert(cmd, "--matplotlib=" .. opts.gui.gui)
+        -- Make IPython's event loop and matplotlib agree on the Qt binding.
+        if opts.gui.qt_api then
+            env.QT_API = opts.gui.qt_api
+        end
+    elseif opts.gui and opts.gui.mplbackend and not env.MPLBACKEND then
+        env.MPLBACKEND = opts.gui.mplbackend
+    end
+    local s = { term = term, launcher = launcher, gui = opts.gui, ready = false, queue = opts.queue or {} }
     if M.config.completion then
         s.socket = vim.fn.tempname() .. ".sock" -- inside Neovim's private (0700) temp dir
         env.PYSESSION_SOCKET = s.socket
@@ -766,7 +849,7 @@ end
 
 -- Validate in the exact environment the REPL will get, then launch.
 local function validate_and_launch(src, launcher, opts)
-    local cmd = list_concat(launcher.python, { "-c", "import sys, IPython; print(sys.executable)" })
+    local cmd = list_concat(launcher.python, { "-c", PROBE_PY })
     notify("checking " .. launcher.label .. " …")
     vim.system(
         cmd,
@@ -778,6 +861,9 @@ local function validate_and_launch(src, launcher, opts)
         },
         vim.schedule_wrap(function(res)
             if res.code == 0 then
+                local last = vim.split(vim.trim(res.stdout or ""), "\n")
+                local ok, probe = pcall(vim.json.decode, last[#last], { luanil = { object = true } })
+                opts.gui = plot_backend(launcher, ok and probe or {}, launcher.env(clean_env()))
                 return launch(src, launcher, opts)
             end
             local err = vim.trim(res.stderr or "")
@@ -1020,7 +1106,19 @@ function M.setup(opts)
         end,
         run = M.run_file,
         info = function()
-            notify(M.status() ~= "" and M.status() or "no session for this buffer")
+            local s = sessions[source_buf()]
+            if not s then
+                return notify("no session for this buffer")
+            end
+            notify(
+                ("%s · plots: %s · completion: %s"):format(
+                    M.status(),
+                    (s.gui and s.gui.gui) and (s.gui.gui .. (s.gui.qt_api and (" (" .. s.gui.qt_api .. ")") or ""))
+                        or (s.gui and s.gui.mplbackend and ("off, forced " .. s.gui.mplbackend))
+                        or "off",
+                    s.socket and "on" or "off"
+                )
+            )
         end,
     }
     vim.api.nvim_create_user_command("PySession", function(a)
