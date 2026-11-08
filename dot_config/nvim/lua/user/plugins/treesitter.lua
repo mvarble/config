@@ -1,68 +1,78 @@
+-- Parser names (not filetypes). Filetypes are derived from these below.
 local languages = {
-	"astro",
-	"bash",
-	"c",
-	"cpp",
-	"css",
-	"dockerfile",
-	"fish",
-	"gitignore",
-	"html",
-	"javascript",
-	"json",
-	"latex",
-	"lua",
-	"markdown",
-	"markdown_inline",
-	"python",
-	"rust",
-	"svelte",
-	"toml",
-	"typescript",
-	"yaml",
+    "astro",
+    "bash",
+    "c",
+    "cpp",
+    "css",
+    "dockerfile",
+    "fish",
+    "gitignore",
+    "html",
+    "javascript",
+    "json",
+    "latex",
+    "lua",
+    "markdown",
+    "markdown_inline",
+    "python",
+    "rust",
+    "svelte",
+    "toml",
+    "typescript",
+    "yaml",
 }
 
+-- Markdown highlight overrides. Re-applied on every :colorscheme, since
+-- loading a colorscheme clears custom highlight groups.
+local function set_markdown_highlights()
+    local palette = require("catppuccin.palettes").get_palette("latte")
+    local heading = { fg = palette.peach, bold = true }
+
+    for level = 1, 6 do
+        vim.api.nvim_set_hl(0, ("@markup.heading.%d.markdown"):format(level), heading)
+    end
+    vim.api.nvim_set_hl(0, "@markup.list.markdown", { fg = palette.yellow, bold = true })
+
+    -- $$ ... $$ blocks (markdown_inline captures them as @markup.math and
+    -- injects the latex parser for the contents).
+    vim.api.nvim_set_hl(0, "@markup.math.markdown_inline", { link = "Special" })
+end
+
 return {
-	"nvim-treesitter/nvim-treesitter",
-	lazy = false,
-	build = ":TSUpdate",
-	event = { "BufReadPre", "BufNewFile" },
-	dependencies = { "windwp/nvim-ts-autotag", "catppuccin/nvim" },
-	config = function()
-		require("nvim-treesitter").install(languages)
+    "nvim-treesitter/nvim-treesitter",
+    branch = "main", -- the rewrite; `master` is frozen and has a different API
+    lazy = false, -- main does not support lazy-loading
+    build = ":TSUpdate",
+    dependencies = { "windwp/nvim-ts-autotag", "catppuccin/nvim" },
+    config = function()
+        -- Async; already-installed parsers are skipped.
+        require("nvim-treesitter").install(languages)
 
-		vim.treesitter.language.register("rust", "rs")
-		vim.treesitter.language.register("javascript", { "js", "mjs", "cjs" })
-		vim.treesitter.language.register("typescript", { "ts", "mts", "cts" })
-		vim.treesitter.language.register("python", "py")
-		vim.treesitter.language.register("yaml", "yml")
-		vim.treesitter.language.register("bash", "sh")
-		vim.treesitter.language.register("markdown", "md")
+        -- mdsvex files: treat as markdown (Neovim doesn't detect .svx).
+        vim.filetype.add({ extension = { svx = "markdown" } })
 
-		-- Treat $$ as latex in Markdown
-		vim.api.nvim_set_hl(0, "@latex", { link = "Special" })
-		vim.api.nvim_create_autocmd("BufRead", {
-			pattern = { "*.md", "*.svx" },
-			callback = function()
-				vim.cmd([[
-                    syntax region texMath start=/\v^\$\$/ end=/\v\$\$$/ contains=texZone
-                    highlight link texMath Special
-                ]])
-			end,
-		})
+        -- main does not enable highlighting itself; start it per buffer.
+        local filetypes = {}
+        for _, lang in ipairs(languages) do
+            vim.list_extend(filetypes, vim.treesitter.language.get_filetypes(lang))
+        end
 
-		-- add colors to headers in Markdown
-		local colorscheme = require("catppuccin.palettes").get_palette("latte")
-		local orange = colorscheme.peach
-		local yellow = colorscheme.yellow
-		vim.api.nvim_set_hl(0, "@header.h1", { fg = orange, bold = true })
-		vim.api.nvim_set_hl(0, "@header.h2", { fg = orange, bold = true })
-		vim.api.nvim_set_hl(0, "@header.h3", { fg = orange, bold = true })
-		vim.api.nvim_set_hl(0, "@header.h4", { fg = orange, bold = true })
-		vim.api.nvim_set_hl(0, "@header.h5", { fg = orange, bold = true })
-		vim.api.nvim_set_hl(0, "@header.h6", { fg = orange, bold = true })
+        vim.api.nvim_create_autocmd("FileType", {
+            group = vim.api.nvim_create_augroup("treesitter_start", { clear = true }),
+            pattern = filetypes,
+            callback = function(args)
+                -- pcall: the parser may still be installing on first launch.
+                pcall(vim.treesitter.start, args.buf)
+            end,
+        })
 
-		-- add colors to line-items in Markdown
-		vim.api.nvim_set_hl(0, "@list", { fg = yellow, bold = true })
-	end,
+        set_markdown_highlights()
+        vim.api.nvim_create_autocmd("ColorScheme", {
+            group = vim.api.nvim_create_augroup("treesitter_markdown_hl", { clear = true }),
+            callback = set_markdown_highlights,
+        })
+
+        require("nvim-ts-autotag").setup()
+    end,
 }
