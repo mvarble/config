@@ -23,6 +23,7 @@ fundle init
 # theme
 fish_config theme choose catppuccin-mocha --color-theme light
 set -g fish_color_valid_path $fish_color_valid_path --underline
+set -g LS_COLORS ''
 
 # pnpm
 set -gx PNPM_HOME "/home/mvarble/.local/share/pnpm"
