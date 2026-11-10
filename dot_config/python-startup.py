@@ -9,13 +9,13 @@ def _main():
         syntax=Syntax(
             keyword=ANSIColors.GREEN,
             builtin=ANSIColors.BLUE,
-            comment=ANSIColors.INTENSE_BLUE,
+            comment=ANSIColors.BLUE,
             string=ANSIColors.CYAN,
             number=ANSIColors.CYAN,
-            definition=ANSIColors.BLUE,
+            definition=ANSIColors.BOLD_BLUE,
             soft_keyword=ANSIColors.BOLD_GREEN,
-            op=ANSIColors.INTENSE_GREEN,
-            reset=ANSIColors.RESET + ANSIColors.INTENSE_GREEN,
+            op=ANSIColors.RESET,
+            reset=ANSIColors.RESET,
         ),
     )
     set_theme(solarized_light_theme)
