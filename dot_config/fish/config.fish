@@ -24,6 +24,7 @@ fundle init
 fish_config theme choose catppuccin-mocha --color-theme light
 set -g fish_color_valid_path $fish_color_valid_path --underline
 set -g LS_COLORS ''
+set -g PYTHONSTARTUP $HOME/.config/python-startup.py
 
 # pnpm
 set -gx PNPM_HOME "/home/mvarble/.local/share/pnpm"
