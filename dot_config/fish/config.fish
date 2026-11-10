@@ -23,8 +23,13 @@ fundle init
 # theme
 fish_config theme choose catppuccin-mocha --color-theme light
 set -g fish_color_valid_path $fish_color_valid_path --underline
-set -g LS_COLORS ''
-set -g PYTHONSTARTUP $HOME/.config/python-startup.py
+set -gx LS_COLORS ''
+
+# light-background hints for CLIs
+set -gx COLORFGBG '0;15'
+set -gx BAT_THEME 'Solarized (light)'
+set -gx FZF_DEFAULT_OPTS '--color=light'
+set -gx PYTHONSTARTUP $HOME/.config/python-startup.py
 
 # pnpm
 set -gx PNPM_HOME "/home/mvarble/.local/share/pnpm"
