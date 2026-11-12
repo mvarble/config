@@ -18,8 +18,7 @@
 .pi/agent/models-store.json
 .pi/agent/bin
 .pi/agent/install
-.pi/agent/npm/*
-!.pi/agent/npm/package.json
+.pi/agent/npm
 .pi/agent/pi-subagents
 .pi/agent/sessions
 .pi/agent/agents/.rpiv-managed.json
