@@ -8,3 +8,4 @@ StripMap 1.0 StripMap.qml
 NotificationSidebar 1.0 NotificationSidebar.qml
 NotificationToasts 1.0 NotificationToasts.qml
 LockScreen 1.0 LockScreen.qml
+Screenshot 1.0 Screenshot.qml
