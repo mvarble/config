@@ -39,6 +39,10 @@ ShellRoot {
         id: lockScreen
     }
 
+    Screenshot {
+        id: screenshot
+    }
+
     // The surfaces are independent: each toggles on its own and can be
     // open at the same time as the others.
     IpcHandler {
@@ -67,6 +71,12 @@ ShellRoot {
         function open(): void { notificationSidebar.open = true; }
         function close(): void { notificationSidebar.open = false; }
         function toggle(): void { notificationSidebar.open ? close() : open(); }
+    }
+
+    IpcHandler {
+        target: "screenshot"
+        function start(): void { screenshot.start(); }
+        function cancel(): void { screenshot.cancel(); }
     }
 
     // Lock only: unlocking goes through PAM on the lock surface, never IPC.
