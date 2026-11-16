@@ -1,7 +1,5 @@
 {
 {{- if or (eq .chezmoi.hostname "gca-7sjgnd4") (eq .chezmoi.hostname "GCA-5QG1DK3")}}
-    "defaultProvider": "Toyon vLLM",
-    "defaultModel": "nemotron-3.5-super-vl",
 {{else}}
     "defaultProvider": "openrouter",
     "defaultModel": "deepseek/deepseek-v4.1-flash",
@@ -16,6 +14,9 @@
 {{- end}}
     "theme": "light",
     "packages": [
+{{- if or (eq .chezmoi.hostname "gca-7sjgnd4") (eq .chezmoi.hostname "GCA-5QG1DK3")}}
+        "npm:pi-bifrost-provider",
+{{- end}}
         "npm:pi-subagents",
         "npm:@juicesharp/rpiv-advisor",
         "npm:@juicesharp/rpiv-ask-user-question",
