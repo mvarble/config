@@ -28,7 +28,6 @@ return {
         config = function()
             require("mason-lspconfig").setup({
                 ensure_installed = {
-                    "astro",
                     "clangd",
                     "cmake",
                     "cssls",
@@ -38,10 +37,8 @@ return {
                     "gitlab_ci_ls",
                     "html",
                     "jsonls",
-                    "julials",
                     "lua_ls",
                     "ruff",
-                    "sqruff",
                     "stylua",
                     "svelte",
                     "taplo",

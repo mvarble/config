@@ -1,6 +1,5 @@
 -- Parser names (not filetypes). Filetypes are derived from these below.
 local languages = {
-    "astro",
     "bash",
     "c",
     "cpp",
