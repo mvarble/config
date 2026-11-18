@@ -20,6 +20,9 @@ hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(programs.screenshot))
 hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(programs.calendar))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(programs.notifications))
 
+-- Close the active window
+hl.bind(mainMod .. " + Q", hl.dsp.window.close())
+
 -- Toggle floating/full
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle" }))
